@@ -34,7 +34,7 @@ const SideBar = () => {
 
   return (
     <div id="sidebar" className='sideBar-menu'>
-      <div className="logo-and-name-cont">
+      <div className="logo-and-name-cont" onClick={()=>toggleSideBar()}>
         <div className="logo-cont">
           <img className="jira-logo" src={jiraLogo} alt="jiralogo" />
         </div> 
