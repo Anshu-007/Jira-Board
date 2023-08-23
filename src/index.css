@@ -11,3 +11,26 @@
     margin:0;
     padding:0;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+   
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background:var(--secondary); 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:var(--primary); 
+     border-radius:10px;
+    
+  }
+  
+  /* Handle on hover */
+  /* ::-webkit-scrollbar-thumb:hover {
+    background:var(--textcolor); 
+  } */
