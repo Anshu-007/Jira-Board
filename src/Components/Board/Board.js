@@ -1,6 +1,6 @@
 import React from 'react'
 import "./board.css"
-import plussign from "../../Assets/icons8-plus-512.png"
+import plusSign from "../../Assets/plus-logo.png"
 
 const Board = () => {
     let Board1 = {
@@ -63,7 +63,7 @@ const Board = () => {
             <div className='status-bar'>
                 
                 <div className='task-container task-container-add' style={{marginTop: "18px"}}>
-                    <img className='plus-sign-img' src={plussign} alt="add logo" />
+                    <img className='plus-sign-img' src={plusSign} alt="add logo" />
                 </div>
             </div>
             
