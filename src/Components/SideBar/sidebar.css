@@ -1,6 +1,123 @@
 .sideBar-menu{
-    width: 15vw;
     height: 100vh;
-    background-color: burlywood;
+    width: 250px;
+    /* position: fixed; */
+    /* z-index: 1; */
+    background-color: var(--secondary);
+    /* overflow-x: hidden; */
+    transition: 0.8s;
+    color:var(--textcolor);
+    
+    
 
+}
+.logo-and-name-cont{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:50px;
+    background-color: var(--primary);
+    
+}
+.logo-cont{
+   padding: 10px;
+    
+}
+.jira-logo{
+  /* display:inline-block;  */
+  height: 26px;
+  width:26px;
+  
+    
+    
+}
+.name-cont{
+    
+    
+}
+/* --------------------------------------------------------------- */
+.tab-and-hidebar-cont{
+    height: 92%;
+    /* background-color: purple; */
+}
+.tab-add-cont{
+    height:70%;
+    transition: all 0.4s;
+}
+.Tabs-cont{
+    height:60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    
+    padding: 10px;
+
+
+}
+.tabs{
+    font-size:16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.add-tab-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:172px;
+    
+
+
+}
+.primary-btn{
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.primary-btn-right-arrow{
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+    
+
+
+/* ------------------------------------------------------------------------------ */
+.hidebar-cont{
+    
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-logo{
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+}
+.active-tab-name{
+    display: block;
+}
+.inactive-tab-name{
+    display: none;
+}
+
+.arrow{
+    height: 25px;
+    width: 25px;
+    padding: 5px;
 }
