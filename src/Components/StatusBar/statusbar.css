@@ -1,0 +1,58 @@
+.status-bar{
+    height: 100%;
+    width: 100%;
+}
+.status-heading{
+    display: flex;
+    justify-content: center;
+}
+.task-container{
+    height: 83vh;
+    background-color: var(--secondary);
+    padding: 5px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    
+    
+   
+}
+.task-container-add{
+    display: flex;
+    align-items: center;
+    
+    justify-content: center; 
+}
+
+/* inserted div cont css */
+.task{
+    background-color: var(--primary);
+    min-width: 155px;
+    min-height: 50px;
+    border-radius: 8px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    font-family: cursive;
+}
+.task-description{}
+.task-data{
+    display: flex;
+    justify-content: space-around;
+}
+.task-number{}
+
+/* inserted div cont css ends */
+.plus-sign-img{
+    height: 50px;
+    width: 50px;
+    transition: 0.4s;
+    
+}
+.plus-sign-img:hover{
+    height: 60px;
+    width: 60px;
+}
