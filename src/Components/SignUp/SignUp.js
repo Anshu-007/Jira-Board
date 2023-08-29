@@ -46,7 +46,7 @@ const SignUp = () => {
                 <input className='input-tags' type="text" placeholder="email " />
               </div>
               <div className='button-cont' >
-                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <button type="submit" className='signup-button'>Sign Up</button>
 
               </div>
               

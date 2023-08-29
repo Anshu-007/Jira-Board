@@ -47,7 +47,7 @@ const SignIn = () => {
                  <label htmlFor="">remember password</label>
                 </div>
                 <div className='button-cont'>
-                 <button type="submit" class="btn btn-primary">LOGIN</button>
+                 <button type="submit" className='signup-button'>LOGIN</button>
                 </div>
               </div>
             </form>
