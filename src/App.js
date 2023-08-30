@@ -1,16 +1,19 @@
 import './App.css';
-// import Board from './Components/Board/Board';
-import Page404 from './Components/Page404/Page404';
-// import SideBar from './Components/SideBar/SideBar';
-// import SignUp from './Components/SignUp/SignUp';
+import Home from './Components/Home/Home';
+import SignIn from './Components/SignIn/SignIn';
+import SignUp from './Components/SignUp/SignUp';
+import {Routes,Route, BrowserRouter} from "react-router-dom"
 
 function App() {
   return (
     <div className="App">
-      {/* <SideBar/>
-      <Board/> */}
-  <Page404/>
-      {/* rest of the work */}
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<SignIn/>} />
+          <Route path='/signUp' element={<SignUp/>} />
+          <Route path='/*' element={<Home/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

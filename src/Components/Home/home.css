@@ -1,0 +1,6 @@
+.home{
+    display: flex;
+}
+.components-container{
+    width: -webkit-fill-available;
+}
