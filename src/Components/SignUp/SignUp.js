@@ -4,10 +4,12 @@ import LoginImg from "../../Assets/login.webp";
 import UserIcon from "../../Assets/user-Logo.png";
 import passwordIcon from "../../Assets/passwordLock.png";
 import emailIcon from "../../Assets/email-Icon.png";
+import backgroundImage from "../../Assets/Background-image.jpg";
 
 const SignUp = () => {
   return (
     <div className='main-cont'> 
+      <img  className='back-img'  src={backgroundImage} alt="" />
         <div className='main-container'>
          <div className='image-cont'>
             <div className='image'>
