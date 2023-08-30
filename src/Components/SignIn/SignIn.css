@@ -7,10 +7,18 @@
 
 
 
+
+}
+.back-img{
+    position: fixed;
+    height: 100vh;
+    width:100vw;
+    z-index: -1;
+    object-fit: cover;
 }
 
 .main-container{
-    background-color: white;
+    /* background-color: rgba(255, 255, 255, 0.105); */
     display: flex;
     
 }
@@ -21,8 +29,8 @@
     justify-content: center;
     gap:20px;
     width:60%;
-    background-color: rgb(255, 255, 255);
-    
+    /* box-shadow: inset 0px 0px 200px 200px var(--logoColor), 0px 0px 50px 50px var(--logoColor); */
+
     
 }
 .login{
@@ -36,7 +44,7 @@
     font-size:25px;
     font-weight: 700;
     font-family: sans-serif;
-    color:blue;
+    color:var(--logoColor);
 
 }
 form{
@@ -91,7 +99,7 @@ form{
 }
 label{
     font-size: 15px;
-    color:blue;
+    color:var(--logoColor);
     
 }
 .check-and-rme{
@@ -103,15 +111,17 @@ label{
 .button-cont{
     display: flex;
     justify-content: center; 
+    cursor: pointer;
 
 }
-button{
+.signup-button{
   color:rgb(255, 255, 255); 
   width: 100px;
   height: 25px;
   border: none;
   border-radius: 30px;
-  background-color: blue;
+  background-color:var(--logoColor);
+  
  
   
 }
@@ -127,6 +137,7 @@ button{
     /* background-color: rgba(84, 84, 84, 0.047); */
     height: 100%;
     width:40%;
+    /* box-shadow: inset 1px 0px 200px 200px var(--logoColor), 0px 0px 50px 50px var(--logoColor); */
     /* border-radius: 0px 60px 60px 0px; */
 }
 .imgs{
@@ -144,13 +155,13 @@ button{
     justify-content: center;
     font-size: 35px;
     font-weight: 600;
-    color:blue;
+    color:var(--logoColor);
     padding-left: 30px;
     padding-bottom: 30px;
 }
 
 .forgot-text{
-    color:blue;
+    color:var(--logoColor);
 }
 
 @media screen and (max-width: 380px){
