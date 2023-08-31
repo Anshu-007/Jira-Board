@@ -89,6 +89,10 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    transition: 0.3s;
+}
+.primary-btn:hover{
+    padding:12px;
 }
 .primary-btn-right-arrow{
     font-size: 16px;

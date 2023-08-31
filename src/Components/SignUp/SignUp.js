@@ -58,7 +58,7 @@ const SignUp = () => {
 
   return (
     <div className='main-cont'> 
-      <img  className='back-img'  src={backgroundImage} alt="" />
+      {/* <img  className='back-img'  src={backgroundImage} alt="" /> */}
         <div className='main-container'>
          <div className='image-cont'>
             <div className='image'>
@@ -95,12 +95,15 @@ const SignUp = () => {
                 <input className='input-tags' type="password" placeholder="password" name="password" onChange={handleInputChange} value={userObject.password} required/>
               </div>
               <div className='button-cont' >
-                <button type="submit" className='signup-button'>Sign Up</button>
+                <button type="submit" className='primary-btn'>Create Account</button>
 
               </div>
             </form>
-            <div className='button-cont' >
-                <button type="button" onClick={()=>{routeToSigin()}} className='signup-button'>Sign In</button>
+              <div className='button-signIn-cont' style={{right: "130px"}}>
+                <button type="button" onClick={()=>{routeToSigin()}} className=' primary-btn'>Sign Up</button>
+              </div>
+              <div className='button-signIn-cont' style={{right: "30px"}}>
+                <button type="button" onClick={()=>{routeToSigin()}} className=' primary-btn'>Sign In</button>
               </div>
           </div>
  
