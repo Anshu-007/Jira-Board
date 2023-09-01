@@ -1,0 +1,54 @@
+.close{
+    margin-left: 350px;
+}
+.addtask-container{
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #00000063;
+    position: fixed;
+}
+
+.addtask-form{
+    margin-top: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    width: 400px;
+    background-color: #139fce;
+    margin-left: 34%;
+}
+.task-heading{
+    font-size: x-large;
+    font-weight: 500;
+    font-family: cursive;
+    display: flex;
+    justify-content: center;
+}
+.task-input-cont{}
+.input-heading{
+    font-family: cursive;
+}
+
+.description-input-cont{}
+.subtask-cont{
+    border: 1px solid beige;
+    width: 370px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.subtask-cont-first{
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+}
+.subtask-cont-second{
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+}
