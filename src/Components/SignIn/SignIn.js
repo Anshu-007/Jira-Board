@@ -95,12 +95,15 @@ const SignIn = () => {
                  <label htmlFor="">remember password</label>
                 </div> */}
                 <div className='button-cont'>
-                 <button type="submit" className='signup-button'>LOGIN</button>
+                 <button type="submit" className='primary-btn'>Proceed</button>
                 </div>
               </div>
             </form>
-            <div className='button-cont'>
-              <button type="button" onClick={()=>routeToSignIn()} className='signup-button'>Sign In</button>
+            <div className='button-signIn-cont' style={{right: "130px"}}>
+              <button type="button" onClick={()=>routeToSignIn()}  className='primary-btn'>Sign Up</button>
+            </div>
+            <div className='button-signIn-cont' style={{right: "30px"}}>
+              <button type="button" onClick={()=>routeToSignIn()}  className='primary-btn' >Sign In</button>
             </div>
           </div>
  
