@@ -21,7 +21,7 @@
 .task-container-add{
     display: flex;
     align-items: center;
-    
+    min-width: 160px;
     justify-content: center; 
 }
 

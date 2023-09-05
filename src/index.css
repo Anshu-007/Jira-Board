@@ -35,3 +35,18 @@
     background:rgb(140 223 251);
 
   }
+  .primary-btn{
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+.primary-btn:hover{
+    padding:15px;
+}

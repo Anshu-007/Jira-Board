@@ -1,15 +1,63 @@
-import React from 'react';
+import {useState} from 'react';
 import './SignIn.css';
 import LoginImg from "../../Assets/login.webp";
 import UserIcon from "../../Assets/user-Logo.png";
 import passwordIcon from "../../Assets/passwordLock.png"
+import {Link, useNavigate} from 'react-router-dom';
 
 
 const SignIn = () => {
+
+  const navigate = useNavigate();
+
+  const [userDetails, setUserDetails] = useState({
+    email :"",
+    password: ""
+  });
+
+  const handleChange = (event)=>{
+    const {name,value} = event.target;
+    console.log(name, value);
+    setUserDetails(prevData =>({
+      ...prevData,
+      [name] : value
+    }))   
+  } 
+
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+
+    try{
+      
+      let response = await fetch('http://localhost:5000/api/auth/signIn',{
+        method:'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(userDetails)
+      });
+
+      let data = await response.json();
+
+      console.log(data);
+
+      navigate('/home');
+
+    }catch(error){
+      console.log(error);
+    }
+
+  }
+
+  const routeToSignIn = ()=>{
+    const data = {user : {name:"abcd",age:39}}
+    navigate('/signUp', {state : data});
+  }
+
+
+
   return (
     <div className='main-cont'>
-      
-{/* ----------------------------------------------------------------------------------------------------------------------------------- */}
         <div className='main-container'>
          <div className='image-cont'>
             <div className='image'>
@@ -28,29 +76,35 @@ const SignIn = () => {
             </div>
 
            
-            <form>
+            <form onSubmit={(e)=> handleSubmit(e)}>
               <div className='one'>
                 <div className='icon-cont' >
                   <img className='icons' src={UserIcon}alt="" />
                 </div>
-                <input className='input-tags' type="text" placeholder="username" /> 
+                <input className='input-tags' type="email" name="email" placeholder="username" onChange={handleChange} value={userDetails.email} required/> 
               </div>
               <div className='one'>
                 <div className='icon-cont'>
                   <img className='icons' src={passwordIcon} alt="" />
                 </div>
-                <input className='input-tags' type="text" placeholder="password" />
+                <input className='input-tags' type="password" name="password" placeholder="password" onChange={handleChange} value={userDetails.password} required/>
               </div>
               <div className='three'>
-                <div className='check-and-rme'>         
+                {/* <div className='check-and-rme'>         
                  <input type="checkbox" /> 
                  <label htmlFor="">remember password</label>
-                </div>
+                </div> */}
                 <div className='button-cont'>
-                 <button type="submit" class="btn btn-primary">LOGIN</button>
+                 <button type="submit" className='primary-btn'>Proceed</button>
                 </div>
               </div>
             </form>
+            <div className='button-signIn-cont' style={{right: "130px"}}>
+              <button type="button" onClick={()=>routeToSignIn()}  className='primary-btn'>Sign Up</button>
+            </div>
+            <div className='button-signIn-cont' style={{right: "30px"}}>
+              <button type="button" onClick={()=>routeToSignIn()}  className='primary-btn' >Sign In</button>
+            </div>
           </div>
  
         </div>

@@ -1,0 +1,196 @@
+.main-cont-addTask1{
+     left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.138);
+    position: fixed;
+    display: none;
+}  
+
+.main-cont-addTask2{
+    position:absolute;
+    background-color:white;
+    height:80vh;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    padding:20px;
+    top:60px;
+    border-radius: 10px;
+    margin-left:30%;
+    /* background-color: rgb(90, 90, 245); */
+
+
+    
+  
+        
+}
+
+.add-task-heading{
+    font-size: 35px;
+    padding-left: 6px;
+    /* display: flex;
+    justify-content: center;
+     */
+     font-family: sans-serif;
+}
+.addtask-form{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+.form-upperpart{
+    display: flex;
+    flex-direction: column;
+}
+.label-input-cont{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.label-add-task{
+    font-size:15px ;
+    color:black;
+    padding-left: 5px;
+}
+.input-conto{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.input-addtask{
+    width:95%;
+    height:40px;
+    border: 1px solid #c5bdbd;
+    /* border-bottom: 2px; */
+    border-radius: 5px;
+    box-shadow: 2px 6px 8px -11px;
+    padding-left: 10px;
+    outline: none;
+
+}
+
+/* ---------------------------------------------------------------------------------------- */
+
+.form-lowerpart{
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+        
+
+        
+        
+}
+.subtask-heading{
+    font-size: 20px;
+    padding-left:6px;
+}
+
+.lower-second-cont{
+    display: flex;
+    flex-direction: column;
+    /* width:100%; */
+    
+}
+.subtask-cont-first{
+    display: flex;
+    gap:10px;
+   
+}
+.subtask-lable-input-cont{
+    display:flex;
+    flex-direction: column;  
+    width: 100%;
+}
+
+.add-new-task-button-cont{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    
+}
+.add-new-task-button{
+    padding: 10px;
+    width:100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap:10px;
+    background-color:skyblue;
+    border:none;
+    border-radius: 10px;
+    transition: 0.5s;
+   
+}
+.add-new-task-button:hover{
+    padding:12px;
+}
+.image-add-new-task-plus{
+    height: 20px;
+    width:20px;
+}
+.create-task-button{
+    padding: 10px;
+    width:100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap:10px;
+    background-color:skyblue;
+    border:none;
+    border-radius: 10px;
+    transition: 0.5s;
+
+}
+.create-task-button:hover{
+    padding:12px;
+}
+
+.status-cont{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+
+
+.status-cont-two{
+    padding: 10px;
+    width:100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    /* gap:10px; */
+    background-color:skyblue;
+    border:none;
+    border-radius: 10px;
+    outline: none;
+
+}
+.options{
+    display: flex;
+    justify-content: center;
+
+
+}
+
+
+@media screen and (max-width:480px){
+    .main-cont-addTask2{
+        height: 100vh;
+        
+        
+    }
+    .subtask-cont-first{
+        display: flex;
+        flex-direction: column;
+    }
+}

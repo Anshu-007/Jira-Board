@@ -3,10 +3,14 @@ import "./board.css"
 import plusSign from "../../Assets/plus-logo.png"
 import StatusBar from '../StatusBar/StatusBar'
 import {appBoards} from "../../Constants"
+import AddTask from '../AddTask/AddTask'
 
 const Board = () => {
     // console.log(appBoards);
-    
+    function addTaskForm(){
+       let addTask = document.getElementById("addTaskCont-id");
+       addTask.style.display = "block";
+    }
     
     let board = appBoards.board1;
     let key = Object.keys(board);
@@ -14,10 +18,11 @@ const Board = () => {
     
   return (
     <div className='board-container'>
+        <AddTask/>
         <div className='active-board-and-add-task-btn-container'>
             <div className='current-board-heading'>Board 1</div>
             <div className='add-task-btn' >
-                <div className='primary-btn'>add task</div>
+                <div onClick={(e)=>addTaskForm(e)} className='primary-btn'>add task</div>
             </div>
         </div>
         <div className='status-bar-container'>
@@ -36,6 +41,7 @@ const Board = () => {
                     <img className='plus-sign-img' src={plusSign} alt="add logo" />
                 </div>
             </div>
+            
             
         </div>
         
