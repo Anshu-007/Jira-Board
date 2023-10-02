@@ -5,12 +5,14 @@ import boardLogo from "../../Assets/board-logo.png";
 import leftArrow from "../../Assets/left-arrow.png";
 import rightArrow from "../../Assets/right-arrow.png";
 import plusSign from "../../Assets/plus-logo.png"
+import Modal from '../Modals/Modal';
 
 
 
 const SideBar = () => {
 
   const [activeSideBar, setActiveSideBar] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   function toggleSideBar(){
 
@@ -28,6 +30,10 @@ const SideBar = () => {
     }
      
      
+  }
+
+  function handleModalView(val){
+    setShowModal(val);
   }
 
   
@@ -61,84 +67,14 @@ const SideBar = () => {
               <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Board 1
               </div>
             </div>
-            <div className="tabs">
-              <div className="tooltext-board">
-                <img className='board-logo' src={boardLogo} alt='B'/> 
-                {activeSideBar ?
-                null :
-                <span className='board-tooltext'>
-                  Board 1
-                </span>
-                }
-              </div>
-              {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
-             
-              <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Board 1
-              </div>
-            </div>
-            <div className="tabs">
-              <div className="tooltext-board">
-                <img className='board-logo' src={boardLogo} alt='B'/> 
-                {activeSideBar ?
-                null :
-                <span className='board-tooltext'>
-                  Board 1
-                </span>
-                }
-              </div>
-              {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
-             
-              <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Board 1
-              </div>
-            </div>
-            <div className="tabs">
-              <div className="tooltext-board">
-                <img className='board-logo' src={boardLogo} alt='B'/> 
-                {activeSideBar ?
-                null :
-                <span className='board-tooltext'>
-                  Board 1
-                </span>
-                }
-              </div>
-              {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
-             
-              <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Board 1
-              </div>
-            </div>
-            <div className="tabs">
-            <div className="tooltext-board">
-                <img className='board-logo' src={boardLogo} alt='B'/> 
-                {activeSideBar ?
-                null :
-                <span className='board-tooltext'>
-                  Board 2
-                </span>
-                }
-              </div>
-              {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
-              <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"}>Board 2</div>
-            </div>
-            <div className="tabs">
-            <div className="tooltext-board">
-                <img className='board-logo' src={boardLogo} alt='B'/> 
-                {activeSideBar ?
-                null :
-                <span className='board-tooltext'>
-                  Board 3
-                </span>
-                }
-              </div>
-              {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
-              <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"}>Board 3</div>
-            </div>
+           
 
           </div>
           <div className="add-tab-cont">
             {activeSideBar ? (
-              <button className="primary-btn" ><img className='arrow' src={plusSign} alt='plus' />Add New Board</button>
+              <button className="primary-btn" onClick={(e)=>handleModalView(true)} ><img className='arrow' src={plusSign} alt='plus' />Add New Board</button>
             ):(
-              <button className="primary-btn"  >+
+              <button className="primary-btn" onClick={(e)=>handleModalView(true)} >+
               <span className='add-tool-text'>
                 Add Board
               </span>
@@ -165,6 +101,7 @@ const SideBar = () => {
 
       
       </div>
+      {showModal ? <Modal title={"Board"} closeModal = {handleModalView}/> : null}
 
     </div>
   )
