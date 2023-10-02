@@ -8,6 +8,32 @@
     display: none;
 }  
 
+.add-task-modal-background{
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #00000063;
+    position: fixed;
+}
+.add-task-modal{
+    top: 0%;
+    position: fixed;
+    left: 0;
+    display: flex;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.add-task-form{
+    background-color: #fdfeff;
+    padding: 40px;
+    border-radius: 10px;
+    min-width: 520px;
+}
+
 .main-cont-addTask2{
     position:absolute;
     background-color:white;
@@ -78,13 +104,13 @@
 /* ---------------------------------------------------------------------------------------- */
 
 .form-lowerpart{
-        display: flex;
-        flex-direction: column;
-        gap:10px;
-        
-
-        
-        
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0px 0px 12px 0px #0d9dcd75;
+    padding: 20px;
+    margin: 20px 0px;
+    border-radius: 10px
 }
 .subtask-heading{
     font-size: 20px;
@@ -114,6 +140,8 @@
     display: flex;
     justify-self: center;
     align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
     
 }
 .add-new-task-button{
@@ -181,7 +209,38 @@
 
 
 }
+.subtask-wrapper{
+    min-width: 100px;
+    border-radius: 10px;
+    padding: 4px;
+    margin: 4px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+.created-subtask-wrapper{
+    width: 575px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    max-height: 46px;
+    box-shadow: 0px 0px 12px 0px #0d9dcd75;
+    padding: 10px;
+    border-radius: 10px;
+}
 
+.subtask-heading-wrapper{
+    background-color: rgba(198, 233, 142, 0.993);
+    padding: 5px 20px;
+    min-width: 200px;
+    border-radius: 20px;
+}
+.cross-button{
+    height: 25px;
+    width: 25px;
+    border-radius: 12.5px;
+    padding: 4px;
+}
 
 @media screen and (max-width:480px){
     .main-cont-addTask2{

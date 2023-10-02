@@ -75,24 +75,6 @@
     justify-content: center;
     align-items: center;
     height:70px;
-    
-
-
-}
-.primary-btn{
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    background-color: var(--primary);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s;
-}
-.primary-btn:hover{
-    padding:12px;
 }
 .primary-btn-right-arrow{
     font-size: 16px;
