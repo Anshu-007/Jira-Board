@@ -1,0 +1,40 @@
+.subtask-cont{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    width: 90%;
+    /* border: 2px solid red; */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.subtask-details{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    
+    
+}
+
+.subtask-img-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 4px;
+}
+.subtask-img-cont{
+    /* display: flex;
+    align-items: center; */
+}
+.subtask-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+    background-color: #d2bb1b;
+    border-radius: 20px;
+    padding: 4px;
+    filter: invert(1);
+}
