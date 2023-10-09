@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './sidebar.css';
 import jiraLogo from "../../Assets/jira-logo-png.png";
 import boardLogo from "../../Assets/board-logo.png";
@@ -6,6 +7,7 @@ import leftArrow from "../../Assets/left-arrow.png";
 import rightArrow from "../../Assets/right-arrow.png";
 import plusSign from "../../Assets/plus-logo.png"
 import Modal from '../Modals/Modal';
+import {appBoards} from "../../Constants"
 
 
 
@@ -13,6 +15,8 @@ const SideBar = () => {
 
   const [activeSideBar, setActiveSideBar] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [boards, setBoards] = useState(Object.keys(appBoards));
+  const navigate = useNavigate();
 
   function toggleSideBar(){
 
@@ -36,6 +40,11 @@ const SideBar = () => {
     setShowModal(val);
   }
 
+  const navigateToBoard = (board)=>{
+    let boardID = board.board_id;
+    navigate(`/board/${boardID}`);
+  }
+
   
 
   return (
@@ -52,21 +61,28 @@ const SideBar = () => {
       <div className = "tab-and-hidebar-cont">
         <div  className="tab-add-cont">
           <div className="Tabs-cont">
-            <div className="tabs">
-              <div className="tooltext-board">
-                <img className='board-logo' src={boardLogo} alt='B'/> 
-                {activeSideBar ?
-                null :
-                <span className='board-tooltext'>
-                  Board 1
-                </span>
-                }
-              </div>
-              {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
-             
-              <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Board 1
-              </div>
-            </div>
+            {boards.map((boardName, idx)=>{
+              return (
+                <div
+                  onClick={()=>{navigateToBoard(appBoards[boardName])}}
+                  className="tabs" key={idx}>
+                  <div className="tooltext-board">
+                    <img className='board-logo' src={boardLogo} alt='B'/> 
+                    {activeSideBar ?
+                    null :
+                    <span className='board-tooltext'>
+                       {boardName}
+                    </span>
+                    }
+                  </div>
+                  {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
+                
+                  <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >
+                    {boardName}
+                  </div>
+                </div>
+              )
+            })}
            
 
           </div>

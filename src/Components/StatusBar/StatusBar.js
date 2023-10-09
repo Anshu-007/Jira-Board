@@ -1,5 +1,6 @@
 import React from 'react'
 import "./statusbar.css"
+import Todo from '../Todo/Todo'
 
 const StatusBar = (props) => {
     console.log(props)
@@ -7,12 +8,7 @@ const StatusBar = (props) => {
     <div className='status-bar'>
         <div className='status-heading'>{props.StatusBarHeading}</div>
         <div className='task-container'>
-            {props.value.map((task,idx)=>{
-                return <div key={idx}  className='task'>
-                            <div className='task-description'>{task["heading"]}</div>
-                            
-                       </div>
-                    })}
+            {props.value.map((task,idx)=>{return <Todo task={task} idx={idx}/>})}
         </div>
     </div>
   )
