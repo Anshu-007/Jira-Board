@@ -7,11 +7,8 @@
     /* overflow-x: hidden; */
     transition: 0.8s;
     color:var(--textcolor);
-    
-    
-    
-
 }
+
 .logo-and-name-cont{
     display:flex;
     justify-content: center;
@@ -69,6 +66,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .add-tab-cont{
     display: flex;

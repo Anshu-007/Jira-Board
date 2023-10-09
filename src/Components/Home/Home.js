@@ -17,9 +17,8 @@ const Home = () => {
             :
             <div className='components-container'>
                 < Routes>
-                    <Route path='/board' element={<Board/>} />
-                    <Route path='/taskDetails' element={<TaskDetails/>}/>
-                    <Route path='/task' element={<h1>space for task details page</h1>} />
+                    <Route path='/board/:id' element={<Board/>} />
+                    <Route path='/taskDetails/:id' element={<TaskDetails/>}/>
                     <Route path='/*' element={<Page404/>} />
                 </Routes>
             </div>

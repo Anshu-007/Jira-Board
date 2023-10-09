@@ -5,11 +5,13 @@ import StatusBar from '../StatusBar/StatusBar'
 import {appBoards} from "../../Constants"
 import AddTask from '../AddTask/AddTask'
 import Modal from '../Modals/Modal'
+import { useLocation } from 'react-router-dom'
 
 const Board = () => {
 
     const [showAddBoard, setShowAddBoard] = useState(false);
     const [showAddTaskModal,setShowAddTaskModal] = useState(false);
+    const location = useLocation()
     
     function addTaskForm(){
        let addTask = document.getElementById("addTaskCont-id");
@@ -26,8 +28,23 @@ const Board = () => {
         setShowAddBoard(val)
     }
     
-    let board = appBoards.board1;
-    let key = Object.keys(board);
+
+    let boards = Object.keys(appBoards);
+    let boardID = location.pathname.substring(location.pathname.lastIndexOf('/')+1);
+    // console.log(boardID, boards)
+
+    let board = {};
+    for(let i = 0; i < boards.length; i++){
+        console.log(appBoards[boards[i]]);
+        if(appBoards[boards[i]].board_id === boardID){
+            board = appBoards[boards[i]];
+            break;
+        }
+    }
+    console.log(board);
+
+    let boardStatusBars = Object.keys(board.boardStatusBars);
+    console.log(boardStatusBars);
     
   return (
     <div className='board-container'>
@@ -45,9 +62,9 @@ const Board = () => {
         <div className='status-bar-container'>
             
             {
-                key.map((value,idx)=>{
+                boardStatusBars.map((value,idx)=>{
                     // console.log(value)
-                    return  <StatusBar value = {board[value]} StatusBarHeading = {value} />
+                    return  <StatusBar value = {board.boardStatusBars[value]} StatusBarHeading = {value} />
                     
                 })
             }

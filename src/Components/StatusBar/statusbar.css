@@ -31,14 +31,22 @@
     min-width: 155px;
     min-height: 50px;
     border-radius: 8px;
-    padding: 5px;
+    padding: 5px 10px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     font-size: xx-large;
     font-family: cursive;
+    cursor: pointer;
+}
+.task:hover{
+    box-shadow: 0px 0px 3px 0px var(--logoColor);
 }
 .task-description{}
+.subtask-count{
+    font-size: 10px;
+}
 .task-data{
     display: flex;
     justify-content: space-around;
