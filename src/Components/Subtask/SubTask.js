@@ -14,21 +14,22 @@ const SubTask = (props) => {
     let background = subtask.status === "TODO" ? todoColor : subtask.status === "PENDING" ? pendingColor : completeColor;
 
   return (
-    <div className='subtask-cont' style={{backgroundColor : background}} key={subtask.id}>
+    <div className='subtask-cont' key={subtask.id}>
             <div className='subtask-details'>
                     <h5>Subtask :</h5><h6>{subtask.heading}</h6>
             </div>
+            
+
+
             <div className='subtask-img-wrapper'>
+                <div className='subtask-status'  style={{backgroundColor : background}}>
+                  {subtask.status}
+
+                </div>
                 <div className='subtask-img-cont'>
                     <img className='subtask-img' src={eye} alt="" />
-
                 </div>
-                <div className='subtask-img-cont'>
-                    <img className='subtask-img'  src={editimg} alt="" />
-                </div>
-
             </div>  
-         
     </div>
   )
 }
