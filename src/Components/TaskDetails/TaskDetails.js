@@ -1,10 +1,17 @@
 import React from "react";
 import "./taskdetails.css";
+import { useState } from "react";
+import SubTaskDetails from '../SubTaskDetails/SubTaskDetails'
+
 
 import "../../index.css";
 import SubTask from "../Subtask/SubTask";
 
 const TaskDetails = () => {
+  // two states to show task and share data to showtask details 
+  const [showSubTaskDetails,setShowSubTaskDetails] = useState(false);
+  const [subTask,setSubTask] = useState({});
+  
   let object = {
     id: "123456",
     heading: "task1",
@@ -21,7 +28,7 @@ const TaskDetails = () => {
       },
       {
         id: "Abcd122",
-        heading: "subtask1",
+        heading: "subtask2",
         description: "subtask 1 description",
         assigned_to: "anshu",
         assigned_by: "deepak",
@@ -29,7 +36,7 @@ const TaskDetails = () => {
       },
       {
         id: "Abcd123",
-        heading: "subtask1",
+        heading: "subtask3",
         description: "subtask 1 description",
         assigned_to: "anshu",
         assigned_by: "deepak",
@@ -37,7 +44,7 @@ const TaskDetails = () => {
       },
       {
         id: "Abcd126",
-        heading: "subtask1",
+        heading: "subtask4",
         description: "subtask 1 description",
         assigned_to: "anshu",
         assigned_by: "deepak",
@@ -45,15 +52,15 @@ const TaskDetails = () => {
       },
       {
         id: "Abcd127",
-        heading: "subtask1",
+        heading: "subtask5",
         description: "subtask 1 description",
         assigned_to: "anshu",
-        assigned_by: "deepak",
+        assigned_by: "deepak", 
         status: "TODO",
       },
       {
         id: "Abcd128",
-        heading: "subtask1",
+        heading: "subtask6",
         description: "subtask 1 description",
         assigned_to: "anshu",
         assigned_by: "deepak",
@@ -61,7 +68,7 @@ const TaskDetails = () => {
       },
       {
         id: "Abcd124",
-        heading: "subtask1",
+        heading: "subtask7",
         description: "subtask 1 description",
         assigned_to: "anshu",
         assigned_by: "deepak",
@@ -69,7 +76,7 @@ const TaskDetails = () => {
       },
       {
         id: "Abcd125",
-        heading: "subtask1",
+        heading: "subtask",
         description: "subtask 1 description",
         assigned_to: "anshu",
         assigned_by: "deepak",
@@ -79,6 +86,15 @@ const TaskDetails = () => {
   };
 
   let subtasks = object.subtask;
+  
+  function getSubTask(e,subtask){
+    setShowSubTaskDetails(true);
+    setSubTask(subtask);
+    
+  }
+  function closePopUp(e){
+    setShowSubTaskDetails(false);
+  }
   
 
   return (
@@ -122,12 +138,15 @@ const TaskDetails = () => {
             </div>
             <div className="subtask-content">
                 {subtasks.map((subtask,idx)=>{
-                    return (<SubTask subtask={subtask}/>);
+                    return (<SubTask subtask={subtask} getSubTask ={getSubTask}/>);
                 })}
             </div> 
           </div>
         </div>
       </div>
+      {
+        (showSubTaskDetails === true)? <SubTaskDetails closePopUp={closePopUp}subTask={subTask}/> : null
+      }
     </div>
   );
 };

@@ -43,7 +43,9 @@
 .task:hover{
     box-shadow: 0px 0px 3px 0px var(--logoColor);
 }
-.task-description{}
+.task-description{
+    font-size: 20px;
+}
 .subtask-count{
     font-size: 10px;
 }
