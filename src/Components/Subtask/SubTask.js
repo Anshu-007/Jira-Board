@@ -5,8 +5,10 @@ import "./subTask.css";
 
 
 const SubTask = (props) => {
+  
 
-    const {subtask} = props;
+    const {subtask,getSubTask} = props;
+    // console.log(getSubTask);
     let completeColor = 'rgb(181 255 185)';
     let pendingColor = 'rgb(211 195 255)';
     let todoColor = 'rgb(255 200 174)';
@@ -27,9 +29,11 @@ const SubTask = (props) => {
 
                 </div>
                 <div className='subtask-img-cont'>
-                    <img className='subtask-img' src={eye} alt="" />
+                    <img onClick={(e)=>getSubTask(e,subtask)} className='subtask-img' src={eye} alt="" />
+
                 </div>
             </div>  
+            
     </div>
   )
 }
