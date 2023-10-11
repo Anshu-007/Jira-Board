@@ -8,7 +8,6 @@ const SubTask = (props) => {
   
 
     const {subtask,getSubTask} = props;
-    // console.log(getSubTask);
     let completeColor = 'rgb(181 255 185)';
     let pendingColor = 'rgb(211 195 255)';
     let todoColor = 'rgb(255 200 174)';

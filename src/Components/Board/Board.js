@@ -35,16 +35,13 @@ const Board = () => {
 
     let board = {};
     for(let i = 0; i < boards.length; i++){
-        console.log(appBoards[boards[i]]);
         if(appBoards[boards[i]].board_id === boardID){
             board = appBoards[boards[i]];
             break;
         }
     }
-    console.log(board);
 
     let boardStatusBars = Object.keys(board.boardStatusBars);
-    console.log(boardStatusBars);
     
   return (
     <div className='board-container'>
@@ -55,16 +52,13 @@ const Board = () => {
             <div className='add-task-btn' >
                 <div onClick={(e)=>handleAddTaskModal(true)} className='primary-btn'>add task</div>
             </div>
-            <div className='add-task-btn' >
-                <div onClick={()=>handleAddTaskModal(true)} className='primary-btn'>add task</div>
-            </div>
         </div>
         <div className='status-bar-container'>
             
             {
                 boardStatusBars.map((value,idx)=>{
                     // console.log(value)
-                    return  <StatusBar value = {board.boardStatusBars[value]} StatusBarHeading = {value} />
+                    return  <StatusBar value = {board.boardStatusBars[value]} StatusBarHeading = {value} index={idx}/>
                     
                 })
             }
