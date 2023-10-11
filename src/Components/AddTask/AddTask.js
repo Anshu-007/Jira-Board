@@ -4,6 +4,8 @@ import { useState } from 'react';
 import plusSign from "../../Assets/plus-logo2.png"
 import '../Modals/modals.css'
 import SubTaskForm from './SubTaskForm';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../Redux/Reducers/appBoardSlice';
 
 const AddTask = (props) => {
     const [ task ,setTask] = useState("");
@@ -15,6 +17,7 @@ const AddTask = (props) => {
     const [ subAsignTo ,setSubAsignTo] = useState("");
     const [ subAsignee ,setSubAsignee] = useState("");
     const [ status ,setStatus] = useState("todo");
+    const dispatch = useDispatch();
 
     const [subtaskDetails, setSubTaskDetails] = useState({
         heading : "",
@@ -41,21 +44,22 @@ const AddTask = (props) => {
     function submit(e){
         e.preventDefault();
         
-    object.heading = task;
-    object.description = description;
-    object.subtask.heading = subTask;
-    object.subtask.description = subDescription;
-    object.subtask.assigned_to = subAsignTo;
-    object.subtask.assigned_by =subAsignee;
-    object.status = status;
-    console.log(object);
-    setTask("")
-    setDescription("")
-    setSubTask("")
-    setSubDescription("")
-    setSubAsignTo("")
-    setSubAsignee("")
-    setStatus("todo")
+        object.heading = task;
+        object.description = description;
+        object.subtask.heading = subTask;
+        object.subtask.description = subDescription;
+        object.subtask.assigned_to = subAsignTo;
+        object.subtask.assigned_by =subAsignee;
+        object.status = status;
+        console.log(object);
+        dispatch(addTask(object));
+        setTask("")
+        setDescription("")
+        setSubTask("")
+        setSubDescription("")
+        setSubAsignTo("")
+        setSubAsignee("")
+        setStatus("todo")
     }
 
     const handleSubTaskDetails = (e)=>{
@@ -73,8 +77,6 @@ const AddTask = (props) => {
         let temp = subtaskArray;
         temp.push(subObject);
         setSubtaskArray(temp);
-
-        console.log(subtaskArray);
         setShowSubTask(false);
 
     }

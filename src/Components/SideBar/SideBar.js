@@ -65,7 +65,9 @@ const SideBar = () => {
               return (
                 <div
                   onClick={()=>{navigateToBoard(appBoards[boardName])}}
-                  className="tabs" key={idx}>
+                  className="tabs" 
+                  key={idx}
+                >
                   <div className="tooltext-board">
                     <img className='board-logo' src={boardLogo} alt='B'/> 
                     {activeSideBar ?

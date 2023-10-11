@@ -38,9 +38,6 @@ const SignIn = () => {
       });
 
       let data = await response.json();
-
-      console.log(data);
-
       navigate('/home');
 
     }catch(error){
