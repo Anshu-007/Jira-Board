@@ -20,8 +20,6 @@ const Board = () => {
 
     const handleAddTaskModal = (val)=>{
         setShowAddTaskModal(val);
-    //     let addTask = document.getElementById("addTaskCont-id");
-    //    addTask.style.display = "none";
     }
 
     const handleAddStatusBarModal = (val) =>{
@@ -31,7 +29,6 @@ const Board = () => {
 
     let boards = Object.keys(appBoards);
     let boardID = location.pathname.substring(location.pathname.lastIndexOf('/')+1);
-    // console.log(boardID, boards)
 
     let board = {};
     for(let i = 0; i < boards.length; i++){
@@ -57,7 +54,6 @@ const Board = () => {
             
             {
                 boardStatusBars.map((value,idx)=>{
-                    // console.log(value)
                     return  <StatusBar value = {board.boardStatusBars[value]} StatusBarHeading = {value} index={idx}/>
                     
                 })
