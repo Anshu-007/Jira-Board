@@ -6,7 +6,7 @@ export const appBoards = {
                 {
                     id: "123456",
                     heading : "task1",
-                    position: 1,
+                    description : "some task",
                     subtask: [ 
                         {
                             id : "Abcd123",
@@ -37,7 +37,8 @@ export const appBoards = {
                             assigned_by : "deepak",
                             status : "TODO"
                         }
-                    ]
+                    ],
+                    status : "TODO"
                 },
                 {
                     id: "123457",

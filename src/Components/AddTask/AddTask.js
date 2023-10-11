@@ -6,60 +6,49 @@ import '../Modals/modals.css'
 import SubTaskForm from './SubTaskForm';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../Redux/Reducers/appBoardSlice';
+import { createUUID } from '../../Utils/Utils';
+import { useLocation } from 'react-router';
 
 const AddTask = (props) => {
-    const [ task ,setTask] = useState("");
     const [showSubTask, setShowSubTask] = useState(false);
-    const [ subtaskArray ,setSubtaskArray] = useState([]);
-    const [ description ,setDescription] = useState("");
-    const [ subTask ,setSubTask] = useState("");
-    const [ subDescription ,setSubDescription] = useState("");
-    const [ subAsignTo ,setSubAsignTo] = useState("");
-    const [ subAsignee ,setSubAsignee] = useState("");
-    const [ status ,setStatus] = useState("todo");
-    const dispatch = useDispatch();
-
+    const [ task ,setTask] = useState({
+        id : "",
+        heading : "",
+        description :"",
+        subtask :[],
+        status : ""
+    });
     const [subtaskDetails, setSubTaskDetails] = useState({
+        id : "",
         heading : "",
         description : "",
+        assigned_To : "",
         assigned_By : "",
-        assigned_To : ""
-    })
-    
-    let object = {
-        id: "123456",
-        heading : "task1",
-        position: 1,
-        subtask:  
-            {
-                id : "Abcd123",
-                heading: "subtask1",
-                description:"subtask 1 description",
-                assigned_to: "anshu",
-                assigned_by : "deepak",
-                status : "TODO"
-            }
-    }
+        status : "",
+    });
+
+    const dispatch = useDispatch();
+    const location = useLocation();
 
     function submit(e){
         e.preventDefault();
-        
-        object.heading = task;
-        object.description = description;
-        object.subtask.heading = subTask;
-        object.subtask.description = subDescription;
-        object.subtask.assigned_to = subAsignTo;
-        object.subtask.assigned_by =subAsignee;
-        object.status = status;
-        console.log(object);
-        dispatch(addTask(object));
-        setTask("")
-        setDescription("")
-        setSubTask("")
-        setSubDescription("")
-        setSubAsignTo("")
-        setSubAsignee("")
-        setStatus("todo")
+        let newTask = task;
+        newTask = {...newTask, id : createUUID()};
+        console.log(newTask);
+        setTask(newTask);
+
+        let boardName = location.pathname.substring(location.pathname.indexOf('/')+1, location.pathname.lastIndexOf('/')+1);
+
+        dispatch(addTask({task : newTask, boardName : boardName }));
+        setTask({
+            id : "",
+            heading : "",
+            description :"",
+            subtask :[],
+            status : ""
+        })
+        props.handleAddTaskModal(false);
+
     }
 
     const handleSubTaskDetails = (e)=>{
@@ -70,15 +59,33 @@ const AddTask = (props) => {
         }))
     }
 
+    const handleTaskInput = (e)=>{
+        const {name, value} = e.target;
+        setTask((prevState)=>({
+            ...prevState,
+            [name]  : value
+        }))
+    }
+
     const createSubtask = ()=>{
        
         let subObject = subtaskDetails;
-
-        let temp = subtaskArray;
+        subObject = {...subObject, id : createUUID()}
+        let temp = task.subtask;
         temp.push(subObject);
-        setSubtaskArray(temp);
+        setTask((prevState)=>({
+            ...prevState,
+            subtask : temp
+        }))
+        setSubTaskDetails({
+            id : "",
+            heading : "",
+            description : "",
+            assigned_To : "",
+            assigned_By : "",
+            status : "",
+        })
         setShowSubTask(false);
-
     }
     
 
@@ -93,20 +100,20 @@ const AddTask = (props) => {
                   <div className='label-input-cont'>
                     <label htmlFor="" className='label-add-task'>Task name</label>
                     <div className='input-conto'>
-                      <input onChange={(e)=>setTask(e.target.value)} value={task} placeholder='' type="text" required />
+                      <input onChange={(e)=>{handleTaskInput(e)}} name="heading"  value={task.heading} placeholder='' type="text" required />
                     </div>
                   </div>
                   <div className='label-input-cont'>
                     <label htmlFor="" className='label-add-task'>Description</label>
                     <div className='input-conto'>
-                      <input onChange={(e)=>setDescription(e.target.value)} value={description}  type="text" required />
+                      <input onChange={(e)=>{handleTaskInput(e)}} name='description' value={task.description}  type="text" required />
                     </div>
                   </div>
                 </div>
                 
-                {subtaskArray.length != 0 ?
+                {task.subtask.length != 0 ?
                     <div className='created-subtask-wrapper'>
-                    {subtaskArray.map((item, idx)=>{
+                    {task.subtask.map((item, idx)=>{
                           return (<div key={idx} className='subtask-wrapper'>
                                 <div className='subtask-heading-wrapper'>{item.heading}</div>
                                 <button type='button' className='danger-btn cross-button'>x</button>
@@ -122,8 +129,7 @@ const AddTask = (props) => {
                     createSubtask = {createSubtask}
                     handleSubTaskDetails = {handleSubTaskDetails}
                 />}
-                
-                
+
                     <div>
                         <div className='add-new-task-button-cont'>
                             <button type="button" className=" add-new-task-button" onClick={()=>setShowSubTask(true)}><img  src={plusSign} alt="" className=' image-add-new-task-plus' /> Add new Sub-task</button> 
@@ -132,10 +138,10 @@ const AddTask = (props) => {
                 
             
                     <div className=' status-cont'>
-                    <select onChange={(e)=>{setStatus(e.target.value)}} name="status" className='status-cont-two'>
-                        <option value="todo" className='options'>Todo</option>
-                        <option value="pending">pending</option>
-                        <option value="done">done</option>
+                    <select onChange={(e)=>{handleTaskInput(e)}}  name="status" value={task.status} className='status-cont-two'>
+                        <option value="TODO" className='options'>Todo</option>
+                        <option value="INPROGRESS">In Progress</option>
+                        <option value="COMPLETED">Conplete</option>
                     </select>               
                     </div>
 

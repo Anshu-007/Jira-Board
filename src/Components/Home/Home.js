@@ -17,7 +17,7 @@ const Home = () => {
             :
             <div className='components-container'>
                 < Routes>
-                    <Route path='/board/:id' element={<Board/>} />
+                    <Route path='/:board/:id' element={<Board/>} />
                     <Route path='/taskDetails/:id' element={<TaskDetails/>}/>
                     <Route path='/*' element={<Page404/>} />
                 </Routes>

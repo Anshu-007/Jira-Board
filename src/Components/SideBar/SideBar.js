@@ -40,9 +40,10 @@ const SideBar = () => {
     setShowModal(val);
   }
 
-  const navigateToBoard = (board)=>{
+  const navigateToBoard = (board, boardName)=>{
+    console.log(boardName,"sdjfhk")
     let boardID = board.board_id;
-    navigate(`/board/${boardID}`);
+    navigate(`/${boardName}/${boardID}`);
   }
 
   
@@ -64,7 +65,7 @@ const SideBar = () => {
             {boards.map((boardName, idx)=>{
               return (
                 <div
-                  onClick={()=>{navigateToBoard(appBoards[boardName])}}
+                  onClick={()=>{navigateToBoard(appBoards[boardName], boardName)}}
                   className="tabs" 
                   key={idx}
                 >
