@@ -9,7 +9,7 @@ const appboardSlice = createSlice({
             board_id : "",
             boardStatusBars : {
                 todo:[],
-                inProgess : [],
+                inProgress : [],
                 completed : []
             }
         }
@@ -17,11 +17,18 @@ const appboardSlice = createSlice({
     reducers:{
         addTask(state, action){
             console.log(state.task, action);
-            // payload should contains board ID, status bar, task details
+            
             let boardName = action.payload.boardName;
             let newTask = action.payload.task;
 
-            console.log(boardName, newTask)
+            let taskStatus = newTask.status;
+            if(taskStatus === "INPROGRESS"){
+                state[boardName].boardStatusBars["inProgress"].push(newTask);
+            }else if(taskStatus === "TODO"){
+                state[boardName].boardStatusBars["todo"].push(newTask);
+            }else if(taskStatus === "COMPLETED"){
+                state[boardName].boardStatusBars["completed"].push(newTask);
+            }
             
         },
         addBoard(state, action){

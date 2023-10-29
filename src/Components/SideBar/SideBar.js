@@ -12,7 +12,7 @@ import {appBoards} from "../../Constants"
 
 
 const SideBar = () => {
-
+  const [activeBoardName,setActiveBoardName] = useState("");
   const [activeSideBar, setActiveSideBar] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [boards, setBoards] = useState(Object.keys(appBoards));
@@ -24,7 +24,7 @@ const SideBar = () => {
     let logoName = document.getElementById("logo-name");
 
     if(activeSideBar === true){
-      sideBar.style.width = "50px";
+      sideBar.style.width = "75px";
       logoName.style.display = "none"
       setActiveSideBar(false);
     }else{
@@ -44,7 +44,11 @@ const SideBar = () => {
     console.log(boardName,"sdjfhk")
     let boardID = board.board_id;
     navigate(`/${boardName}/${boardID}`);
+    setActiveBoardName(boardName);
   }
+
+
+  
 
   
 
@@ -53,10 +57,11 @@ const SideBar = () => {
       <div className="logo-and-name-cont" onClick={()=>toggleSideBar()}>
         <div className="logo-cont">
           <img className="jira-logo" src={jiraLogo} alt="jiralogo" />
-        </div> 
-        <div id='logo-name' className="name-cont">
+          <div id='logo-name' className="name-cont">
           JIRA
         </div>
+        </div> 
+        
       </div>
       {/* ----------------------------------------------------------------------------------------------------------------------------- */}
       <div className = "tab-and-hidebar-cont">
@@ -66,7 +71,7 @@ const SideBar = () => {
               return (
                 <div
                   onClick={()=>{navigateToBoard(appBoards[boardName], boardName)}}
-                  className="tabs" 
+                  className={boardName===activeBoardName? "active-Board-Name" : "tabs" } 
                   key={idx}
                 >
                   <div className="tooltext-board">
