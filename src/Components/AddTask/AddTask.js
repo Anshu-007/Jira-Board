@@ -37,7 +37,7 @@ const AddTask = (props) => {
         console.log(newTask);
         setTask(newTask);
 
-        let boardName = location.pathname.substring(location.pathname.indexOf('/')+1, location.pathname.lastIndexOf('/')+1);
+        let boardName = location.pathname.substring(location.pathname.indexOf('/')+1, location.pathname.lastIndexOf('/'));
 
         dispatch(addTask({task : newTask, boardName : boardName }));
         setTask({

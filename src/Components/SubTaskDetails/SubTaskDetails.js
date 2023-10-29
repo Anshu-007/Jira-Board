@@ -31,20 +31,24 @@ const subTaskDetails = (props) => {
               <div className="task-content-cont">{subTask.length}</div>
             </div>
             <div className="main-task-headings-cont">
-              <div className="task-heading">To Do's :</div>
+              <div className="task-heading">Status :</div>
               <div className="task-content-cont">{}</div>
             </div>
             <div className="main-task-headings-cont">
-              <div className="task-heading">Pending :</div>
+              <div className="task-heading">Assign To :</div>
               <div className="task-content-cont">{}</div>
             </div>
             <div className="main-task-headings-cont">
-                <div  className="task-heading">Completed :</div>
+                <div  className="task-heading">Assign By :</div>
                 <div className="task-content-cont">{}</div>
             </div>
             <div className='add-new-task-button-cont'>
               <div className=''>
-                  <button className='primary-btn'>Edit</button>
+                  <button 
+                    // onClick={(e)=>editsubtask(e,subTask)} 
+                    className='primary-btn'>
+                    Edit
+                  </button>
               </div>
               <div className=''>
                   <button onClick={(e)=>closePopUp(e)} className='danger-btn'>Close</button>

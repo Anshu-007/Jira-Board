@@ -145,7 +145,13 @@ const TaskDetails = () => {
         </div>
       </div>
       {
-        (showSubTaskDetails === true)? <SubTaskDetails closePopUp={closePopUp}subTask={subTask}/> : null
+        (showSubTaskDetails === true) ? 
+          <SubTaskDetails 
+            closePopUp={closePopUp} 
+            // editsubtask={editsubtask(subTask)} 
+            subTask={subTask}/> 
+          : 
+          null
       }
     </div>
   );
