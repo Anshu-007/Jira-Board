@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import '../SignIn/SignIn.css'
 import LoginImg from "../../Assets/login.webp";
 import UserIcon from "../../Assets/user-Logo.png";
@@ -6,40 +6,64 @@ import passwordIcon from "../../Assets/passwordLock.png";
 import emailIcon from "../../Assets/email-Icon.png";
 import backgroundImage from "../../Assets/Background-image.jpg";
 import { useNavigate } from 'react-router-dom';
+import Toaster from '../Toaster/Toaster';
 
 const SignUp = () => {
 
   const navigate = useNavigate();
+  const [showToaster, setShowToaster] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [userObject, setUserObject] = useState({
     name: "",
     email : "",
     password : ""
   })
 
+  function userExists(userDeatils){
+    let users = localStorage.getItem('users');
+    if(!users){
+      return;
+    }
+
+    users = JSON.parse(users);
+    for(let i = 0; i < users.length; i++){
+      if(users[i].email === userObject.email){
+        return true;
+      }
+    }
+    return false;
+
+  }
+
   const handleSubmit = async(e)=>{
     e.preventDefault();
-
-    try{
-      const response = await fetch('http://localhost:5000/api/auth/createUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userObject)
-      });
-  
-      const data = await response.json();
-
-    }catch(error){
-      console.log(error);
-    }
-    
-    setUserObject({
-      name: "",
-      email : "",
-      password : ""
-    })
-
+    let users = localStorage.getItem('users');
+    if(users){
+      users = JSON.parse(users);
+      if(userExists(userObject)){
+        setShowToaster(true);
+        setErrorMessage('User Already Exists')
+      }else{
+        users.push(userObject);
+        setUserObject({
+          name: "",
+          email : "",
+          password : ""
+        })
+        localStorage.setItem('users',JSON.stringify(users));
+        navigate('/');
+      }
+    }else{
+      users = [];
+      users.push(userObject);
+      setUserObject({
+        name: "",
+        email : "",
+        password : ""
+      })
+      localStorage.setItem('users',JSON.stringify(users));
+      navigate('/');
+    }   
   }
 
   const handleInputChange = event => {
@@ -58,6 +82,7 @@ const SignUp = () => {
   return (
     <div className='main-cont'> 
       {/* <img  className='back-img'  src={backgroundImage} alt="" /> */}
+      {showToaster ? <Toaster message={errorMessage} closeToaster={setShowToaster}/> : null}
         <div className='main-container'>
          <div className='image-cont'>
             <div className='image'>
@@ -71,7 +96,10 @@ const SignUp = () => {
           <div className='form-cont'>
             <div className='login'>
             <div className='login-heading'>
-              Sign Up Here!
+
+              You are here for the First Time !!
+              <br/>
+              Sign Up Here!!!
             </div>
             </div>
             <form onSubmit={(e)=> handleSubmit(e)}> 
@@ -98,9 +126,6 @@ const SignUp = () => {
 
               </div>
             </form>
-              <div className='button-signIn-cont' style={{right: "130px"}}>
-                <button type="button" onClick={()=>{routeToSigin()}} className=' primary-btn'>Sign Up</button>
-              </div>
               <div className='button-signIn-cont' style={{right: "30px"}}>
                 <button type="button" onClick={()=>{routeToSigin()}} className=' primary-btn'>Sign In</button>
               </div>

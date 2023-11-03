@@ -22,3 +22,27 @@ export function createUUID() {
     var uuid = s.join("");
     return uuid;
 }
+
+export function getPath(){
+  let pathName = document.location.pathname 
+  let idx= pathName.lastIndexOf('/');
+
+  let newString = pathName.substring(idx+1);
+  return newString; 
+}
+export function getBoard(appBoards, boardId){
+    for(let i = 0; i < appBoards.length; i++){
+        if(appBoards[i].board_id === boardId){
+            return appBoards[i];
+        }
+    }
+    return {};
+}
+export function getStatusOptions(board){
+    
+    let statusBars= board.boardStatusBars;
+    let statusOptions = statusBars.map((status,idx)=> status.name)
+
+    
+    return statusOptions;
+}

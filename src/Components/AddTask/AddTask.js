@@ -4,10 +4,11 @@ import { useState } from 'react';
 import plusSign from "../../Assets/plus-logo2.png"
 import '../Modals/modals.css'
 import SubTaskForm from './SubTaskForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTask } from '../Redux/Reducers/appBoardSlice';
-import { createUUID } from '../../Utils/Utils';
+import { createUUID, getBoard, getPath, getStatusOptions } from '../../Utils/Utils';
 import { useLocation } from 'react-router';
+
 
 const AddTask = (props) => {
     const [showSubTask, setShowSubTask] = useState(false);
@@ -16,7 +17,7 @@ const AddTask = (props) => {
         heading : "",
         description :"",
         subtask :[],
-        status : ""
+        status : "TODO"
     });
     const [subtaskDetails, setSubTaskDetails] = useState({
         id : "",
@@ -24,22 +25,26 @@ const AddTask = (props) => {
         description : "",
         assigned_To : "",
         assigned_By : "",
-        status : "",
+        status : "TODO",
     });
-
+    const appBoards = useSelector(state=>state.appBoard)
     const dispatch = useDispatch();
     const location = useLocation();
+    let boardId = getPath();
+    // console.log(appBoards)
+    let board = getBoard(appBoards, boardId);
+    // console.log(boardId)
+    let statusOptions = getStatusOptions(board);
 
     function submit(e){
         e.preventDefault();
         let newTask = task;
         newTask = {...newTask, id : createUUID()};
-        console.log(newTask);
         setTask(newTask);
 
-        let boardName = location.pathname.substring(location.pathname.indexOf('/')+1, location.pathname.lastIndexOf('/'));
+        let boardId = getPath();
 
-        dispatch(addTask({task : newTask, boardName : boardName }));
+        dispatch(addTask({task : newTask, boardId : boardId }));
         setTask({
             id : "",
             heading : "",
@@ -83,7 +88,7 @@ const AddTask = (props) => {
             description : "",
             assigned_To : "",
             assigned_By : "",
-            status : "",
+            status : "TODO",
         })
         setShowSubTask(false);
     }
@@ -138,10 +143,10 @@ const AddTask = (props) => {
                 
             
                     <div className=' status-cont'>
-                    <select onChange={(e)=>{handleTaskInput(e)}}  name="status" value={task.status} className='status-cont-two'>
-                        <option value="TODO" className='options'>Todo</option>
-                        <option value="INPROGRESS">In Progress</option>
-                        <option value="COMPLETED">Conplete</option>
+                    <select  onChange={(e)=>{handleTaskInput(e)}}  name="status" value={task.status} className="subtask-edit-input">
+                        {statusOptions.map((status, idx)=>{
+                            return (<option value={status.toUpperCase()} className='options'>{status.toUpperCase()}</option>)
+                        })}
                     </select>               
                     </div>
 

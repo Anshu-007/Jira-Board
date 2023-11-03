@@ -1,14 +1,24 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './SignIn.css';
 import LoginImg from "../../Assets/login.webp";
 import UserIcon from "../../Assets/user-Logo.png";
 import passwordIcon from "../../Assets/passwordLock.png"
 import {Link, useNavigate} from 'react-router-dom';
+import Toaster from '../Toaster/Toaster';
 
 
 const SignIn = () => {
 
   const navigate = useNavigate();
+  const [showToaster, setShowToaster] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  useEffect(()=>{
+    let users = localStorage.getItem('users');
+    // console.log(users);
+    if(!users){
+      navigate('/signUp')
+    }
+  },[])
 
   const [userDetails, setUserDetails] = useState({
     email :"",
@@ -17,7 +27,6 @@ const SignIn = () => {
 
   const handleChange = (event)=>{
     const {name,value} = event.target;
-    console.log(name, value);
     setUserDetails(prevData =>({
       ...prevData,
       [name] : value
@@ -27,34 +36,63 @@ const SignIn = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
 
-    try{
+
+    let users = localStorage.getItem('users');
+    if(users){
+      users = JSON.parse(users);
+      let userFound = false;
+      for(let i = 0; i < users.length; i++){
+        if(users[i].email === userDetails.email){
+          userFound = true;
+          
+          console.log(users[i],userDetails)
+          if(users[i].password !== userDetails.password){
+            setErrorMessage('Wrong Password')
+            setShowToaster(true);
+            break;
+          }else{
+            localStorage.setItem('authorisedUser',JSON.stringify(true));
+            navigate('/home')
+          }
+
+        }
+
+      }
+      if(!userFound){
+        setErrorMessage('User not exists')
+        setShowToaster(true);
+      }
       
-      let response = await fetch('http://localhost:5000/api/auth/signIn',{
-        method:'POST',
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(userDetails)
-      });
-
-      let data = await response.json();
-      navigate('/home');
-
-    }catch(error){
-      console.log(error);
     }
+
+    // try{
+      
+    //   let response = await fetch('http://localhost:5000/api/auth/signIn',{
+    //     method:'POST',
+    //     headers:{
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body:JSON.stringify(userDetails)
+    //   });
+
+    //   let data = await response.json();
+    //   navigate('/home');
+
+    // }catch(error){
+    //   console.log(error);
+    // }
 
   }
 
   const routeToSignIn = ()=>{
-    const data = {user : {name:"abcd",age:39}}
-    navigate('/signUp', {state : data});
+    navigate('/signUp');
   }
 
 
 
   return (
     <div className='main-cont'>
+      {showToaster ? <Toaster message={errorMessage} closeToaster={setShowToaster}/> : null}
         <div className='main-container'>
          <div className='image-cont'>
             <div className='image'>
@@ -96,11 +134,8 @@ const SignIn = () => {
                 </div>
               </div>
             </form>
-            <div className='button-signIn-cont' style={{right: "130px"}}>
-              <button type="button" onClick={()=>routeToSignIn()}  className='primary-btn'>Sign Up</button>
-            </div>
             <div className='button-signIn-cont' style={{right: "30px"}}>
-              <button type="button" onClick={()=>routeToSignIn()}  className='primary-btn' >Sign In</button>
+              <button type="button" onClick={()=>routeToSignIn()}  className='primary-btn'>Sign Up</button>
             </div>
           </div>
  
