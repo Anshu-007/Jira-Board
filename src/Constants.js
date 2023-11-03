@@ -1,5 +1,5 @@
 export const appBoards = {
-    board1 : {
+    "board 1" : {
         board_id : "123abc",
         boardStatusBars : {
             todo:[

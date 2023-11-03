@@ -3,4 +3,5 @@
 }
 .components-container{
     width: -webkit-fill-available;
+    overflow-y: auto;
 }

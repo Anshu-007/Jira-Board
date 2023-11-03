@@ -31,29 +31,23 @@
     justify-content: space-between;
     font-size: 1.3rem;
     background-color:var(--secondary);
-    height:100%;
-    /* width:40vw; */
+    height:600px;
+    width:40vw;
     min-width:310px;
     border-radius: 1rem;
     padding: 1rem;
     gap:1rem;
     
-    
-   
-    
-
-
-
 }
 .sub-task-details{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 10px;
     font-size: 1.3rem;
     background-color:var(--secondary);
     height:100%;
-    width:40vw;
+    /* width:40vw; */
     min-width:310px;
     border-radius: 1rem;
     padding: 1rem;
@@ -63,28 +57,72 @@
 
 .main-task-headings-cont{
     display: flex; 
-    
-
     gap:0.62rem;
+    align-items: center;
     color:rgb(109, 103, 103);
+
 
 }
 
 .description{
-    display: flex;
-    flex-direction: column;
+   flex-direction: column;
+   display: flex; 
+    gap:0.62rem;
+    color:rgb(109, 103, 103);
+}
+.falseDiscription{
+    height:84px;
 }
 
 .task-heading{
     font-weight: 800;
+    min-width:130px;
     
 }
 .task-content-cont{
-    font-size:1.2rem ;
+    font-size:1rem ;
 }
 .subtask-content{
     display:flex ;
     flex-direction: column;
     gap:10px;
     overflow: overlay;
+}
+
+.subtask-edit-input{
+    height: 40px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0px 0px 12px 0px #0d9dcd75;
+    width: 100%;
+    min-width: 50%;
+    margin: 0px; 
+    padding: 0px;
+    padding-left: 2px;
+}
+.subtask-edit-input-description{
+    height: 80px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0px 0px 12px 0px #0d9dcd75;
+    width: 100%;
+    /* min-width: 50%; */
+    margin: 0px; 
+    padding: 0px;
+    padding-left: 2px;
+    resize: none;
+    outline: none;
+
+}
+
+.sub-main-task-headings-cont{
+    display: flex; 
+    /* gap:0.62rem; */
+    color:rgb(109, 103, 103);
+    justify-content: space-between;
+
+}
+
+.task-heading-two{
+    width:45%;
 }
