@@ -38,6 +38,7 @@ const TaskDetails = () => {
     setShowSubTaskDetails(false);
   }
 
+
     
   function handleDeleteTask(){
   
@@ -63,7 +64,7 @@ const TaskDetails = () => {
           </div>
           <div className="task-details-button-wrapper">
             <button onClick={handleDeleteTask} className="danger-btn">delete</button>
-            <button className="primary-btn">back</button>
+            <button onClick={()=>navigate(-1)} className="primary-btn">back</button>
           </div>
         </div>
         <div className="details-wrapper-one">
