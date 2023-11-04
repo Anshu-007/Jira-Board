@@ -16,11 +16,11 @@ import { getBoard } from '../../Utils/Utils';
 
 
 const SideBar = () => {
-
+  const [activeBoardName,setActiveBoardName] = useState("");
   const [activeSideBar, setActiveSideBar] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
-  const reduxState = useSelector(state=>state.appBoard)
+    const navigate = useNavigate();
+const reduxState = useSelector(state=>state.appBoard)
   const [boards, setBoards] = useState(reduxState);
   // const [counter, setCounter] = useState(reduxState.appBoards[0].counter);
 
@@ -36,23 +36,25 @@ const SideBar = () => {
     let logoName = document.getElementById("logo-name");
 
     if(activeSideBar === true){
-      sideBar.style.width = "50px";
+      sideBar.style.width = "75px";
       logoName.style.display = "none"
       setActiveSideBar(false);
     }else{
       sideBar.style.width = "250px";
       logoName.style.display = "block"
       setActiveSideBar(true);
-    } 
-  }
+    }
+       }
 
   function handleModalView(val){
     setShowModal(val);
   }
 
   const navigateToBoard = (board)=>{
+    console.log(board.boardName,"sdjfhk")
     let boardID = board.board_id;
     navigate(`/board/${boardID}`, {state:{boardName: board.boardName}});
+    setActiveBoardName(board.boardName);
   }
 
   const logoutUser = ()=>{
@@ -65,24 +67,21 @@ const SideBar = () => {
       <div className="logo-and-name-cont" onClick={()=>toggleSideBar()}>
         <div className="logo-cont">
           <img className="jira-logo" src={jiraLogo} alt="jiralogo" />
-        </div> 
-        <div id='logo-name' className="name-cont">
+          <div id='logo-name' className="name-cont">
           JIRA
         </div>
+        </div> 
+        
       </div>
       {/* ----------------------------------------------------------------------------------------------------------------------------- */}
       <div className = "tab-and-hidebar-cont">
         <div  className="tab-add-cont">
           <div className="Tabs-cont">
-            {/* <div>
-             {counter}
-            </div>
-            <button onClick={()=>dispatch(changeCounter())} >change Counter</button> */}
             {boards && boards.map((board, idx)=>{
               return (
                 <div
                   onClick={()=>{navigateToBoard(board)}}
-                  className="tabs" 
+                  className={board.boardName===activeBoardName? "active-Board-Name" : "tabs" } 
                   key={idx}
                 >
                   <div className="tooltext-board">
@@ -106,7 +105,7 @@ const SideBar = () => {
 
           </div>
           <div>
-            
+
           </div>
           <div className="add-tab-cont">
             {activeSideBar ? (
@@ -123,21 +122,21 @@ const SideBar = () => {
 
         </div>
         {/* ------------------------------------------------------------------------------------------------------------------------ */}
-        <div>
+<div>
 
-          <div className="hidebar-cont">
-            {activeSideBar ? (
-              <button className="primary-btn" onClick={()=>toggleSideBar()} ><img className='arrow' src={leftArrow} alt='left' /><div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Show Side Bar</div></button>
-            ):(
-              
-              <button className="primary-btn-right-arrow" onClick={()=>toggleSideBar()} ><img className='arrow' src={rightArrow} alt='left' />
-              <span className='tooltiptext'>
-                Show Side Bar
-              </span>
-              </button>
-              
-            )}  
+        <div className="hidebar-cont">
+          {activeSideBar ? (
+            <button className="primary-btn" onClick={()=>toggleSideBar()} ><img className='arrow' src={leftArrow} alt='left' /><div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Show Side Bar</div></button>
+          ):(
             
+            <button className="primary-btn-right-arrow" onClick={()=>toggleSideBar()} ><img className='arrow' src={rightArrow} alt='left' />
+            <span className='tooltiptext'>
+              Show Side Bar
+            </span>
+            </button>
+            
+          )}  
+
           </div>
           <div className="hidebar-cont">
           <div
