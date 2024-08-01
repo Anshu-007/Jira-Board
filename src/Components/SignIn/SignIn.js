@@ -6,7 +6,6 @@ import passwordIcon from "../../Assets/passwordLock.png"
 import {Link, useNavigate} from 'react-router-dom';
 import Toaster from '../Toaster/Toaster';
 
-
 const SignIn = () => {
 
   const navigate = useNavigate();
@@ -65,30 +64,11 @@ const SignIn = () => {
       
     }
 
-    // try{
-      
-    //   let response = await fetch('http://localhost:5000/api/auth/signIn',{
-    //     method:'POST',
-    //     headers:{
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body:JSON.stringify(userDetails)
-    //   });
-
-    //   let data = await response.json();
-    //   navigate('/home');
-
-    // }catch(error){
-    //   console.log(error);
-    // }
-
   }
 
   const routeToSignIn = ()=>{
     navigate('/signUp');
   }
-
-
 
   return (
     <div className='main-cont'>

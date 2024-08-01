@@ -20,6 +20,7 @@ const StatusBar = (props) => {
     taskId,
     setTaskId
   } = props;
+  console.log(statusBarData, 'STATS BAR')
 
   const dispatch = useDispatch();
   
@@ -69,7 +70,7 @@ const StatusBar = (props) => {
     >
         <div className='status-heading'>{StatusBarHeading}</div>
         <div id={StatusBarHeading}  className='task-container'>
-            {statusBarData.map((task,idx)=>{return <Todo  statusName={StatusBarHeading} task={task} key={idx}/>})}
+            {statusBarData.map((task,idx)=>{return <Todo statusBarData = {statusBarData} statusName={StatusBarHeading} task={task} key={idx}/>})}
         </div>
     </div>
   )

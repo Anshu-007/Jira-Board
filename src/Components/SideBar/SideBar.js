@@ -11,9 +11,6 @@ import Modal from '../Modals/Modal';
 // import {appBoards} from "../../Constants"
 import { useSelector, useDispatch } from 'react-redux';
 import { getBoard } from '../../Utils/Utils';
-// import { changeCounter } from '../Redux/Reducers/appBoardSlice';
-
-
 
 const SideBar = () => {
   const [activeBoardName,setActiveBoardName] = useState("");
@@ -21,12 +18,22 @@ const SideBar = () => {
   const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 const reduxState = useSelector(state=>state.appBoard)
-  const [boards, setBoards] = useState(reduxState);
-  // const [counter, setCounter] = useState(reduxState.appBoards[0].counter);
-
-  // const dispatch = useDispatch();
-
+  const [boards, setBoards] = useState();
+  
   useEffect(()=>{
+    console.log(reduxState);
+    
+    async function getBoardData() {
+      try {
+        let boards = await fetch("http://localhost:8080/board/getAllBoards");
+        let response = await boards.json();
+        setBoards(response);
+        
+      } catch (error) {
+        console.log( error);
+      }
+    }
+    getBoardData();
     setBoards(reduxState);
   },[reduxState])
 
@@ -51,10 +58,11 @@ const reduxState = useSelector(state=>state.appBoard)
   }
 
   const navigateToBoard = (board)=>{
-    console.log(board.boardName,"sdjfhk")
-    let boardID = board.board_id;
-    navigate(`/board/${boardID}`, {state:{boardName: board.boardName}});
-    setActiveBoardName(board.boardName);
+    // console.log(board.boardName,"sdjfhk")
+    let boardID = board.id;
+    console.log(board)
+    navigate(`/board/${boardID}`, {state:{boardName: board.name}});
+    setActiveBoardName(board.name);
   }
 
   const logoutUser = ()=>{
@@ -70,8 +78,7 @@ const reduxState = useSelector(state=>state.appBoard)
           <div id='logo-name' className="name-cont">
           JIRA
         </div>
-        </div> 
-        
+        </div>
       </div>
       {/* ----------------------------------------------------------------------------------------------------------------------------- */}
       <div className = "tab-and-hidebar-cont">
@@ -79,33 +86,31 @@ const reduxState = useSelector(state=>state.appBoard)
           <div className="Tabs-cont">
             {boards && boards.map((board, idx)=>{
               return (
-                <div
-                  onClick={()=>{navigateToBoard(board)}}
-                  className={board.boardName===activeBoardName? "active-Board-Name" : "tabs" } 
-                  key={idx}
-                >
-                  <div className="tooltext-board">
-                    <img className='board-logo' src={boardLogo} alt='B'/> 
-                    {activeSideBar ?
-                    null :
-                    <span className='board-tooltext'>
-                       {board.boardName}
-                    </span>
-                    }
-                  </div>
-                  {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
                 
-                  <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >
-                    {board.boardName}
+                  <div
+                    onClick={()=>{navigateToBoard(board)}}
+                    className={board.boardName===activeBoardName? "active-Board-Name" : "tabs" } 
+                    key={idx}
+                  >
+                    <div className="tooltext-board">
+                      <img className='board-logo' src={boardLogo} alt='B'/> 
+                      {activeSideBar ?
+                      null :
+                      <span className='board-tooltext'>
+                        {board.name}
+                      </span>
+                      }
+                    </div>
+                    {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
+                  
+                    <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >
+                      {board.name}
+                    </div>
                   </div>
-                </div>
               )
             })}
-           
-
           </div>
           <div>
-
           </div>
           <div className="add-tab-cont">
             {activeSideBar ? (
@@ -119,9 +124,7 @@ const reduxState = useSelector(state=>state.appBoard)
             )}
             
           </div>
-
         </div>
-        {/* ------------------------------------------------------------------------------------------------------------------------ */}
 <div>
 
         <div className="hidebar-cont">

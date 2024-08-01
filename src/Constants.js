@@ -1,3 +1,17 @@
+// http://localhost:8080/task/getAllTask/-83d4-4962-849c-09da0c57977a G
+// http://localhost:8080/task/{taskId} G40e6c406
+// http://localhost:8080/task/create P 
+                // {
+                //     "id": "2",
+                // 	"boardId":"40e6c406-83d4-4962-849c-09da0c57977a",
+                // 	"name":"Test task",
+                // 	"description":"Test description",
+                // 	"assignTo":"Anshu",
+                // 	"assignBy":"Deepak",
+                // 	"status":"TODO",
+                // 	"dueDate":"2024-09-12"
+                // }
+
 export const appBoards = {
     "board 1" : {
         board_id : "123abc",

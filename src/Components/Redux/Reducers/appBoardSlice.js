@@ -168,6 +168,9 @@ const appboardSlice = createSlice({
         let data = JSON.stringify(newState);
       localStorage.setItem("boards", data);
 
+    },
+    createSubTask(state,action){
+      
     }
   },
 });
@@ -181,4 +184,5 @@ export const {
   changeCounter,
   dragAndDrop,
   deleteTask,
+  createSubTask
 } = appboardSlice.actions;

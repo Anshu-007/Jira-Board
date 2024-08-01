@@ -4,7 +4,7 @@ import './guidance.css'
 const Guidance = () => {
   return (
     <div className='guidance'>
-      <h1>For some user guidance about our JiRA app</h1>
+      <h1>Project Progress Dashboard: Streamlining Workflow with JIRA</h1>
     </div>
   )
 }

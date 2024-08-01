@@ -8,26 +8,41 @@ import SubTask from "../Subtask/SubTask";
 import { useLocation,useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {deleteTask} from '../Redux/Reducers/appBoardSlice'
+import SubTaskForm from "../AddTask/SubTaskForm";
+import { createUUID } from "../../Utils/Utils";
 
 
 
 const TaskDetails = () => {
   // two states to show task and share data to showtask details 
   const [showSubTaskDetails,setShowSubTaskDetails] = useState(false);
+  const [showSubTask, setShowSubTask] = useState(false);
   const [subTask,setSubTask] = useState({});
   const statusBars = useSelector(state=>state.appBoard)
+  // console.log(statusBars)
   const location = useLocation();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  
+  const [subtaskDetails, setSubTaskDetails] = useState({
+    id : "",
+    heading : "",
+    description : "",
+    assigned_To : "",
+    assigned_By : "",
+    status : location.state.statusName,
+});
+   
   let task = location.state.task;
+  // console.log(task)
   let statusOptions = location.state.statusOptions;
   let boardId = location.state.boardId;
   let statusName = location.state.statusName;
+  
+  let subtasks = task?.subtask || [];
+  // console.log(subtasks)
 
 
-  let subtasks = task.subtask;
   
   function getSubTask(e,subtask){
     setShowSubTaskDetails(true);
@@ -53,6 +68,34 @@ const TaskDetails = () => {
     
     navigate(-1);
   }
+  const createSubtask = ()=>{
+       
+    let subObject = subtaskDetails;
+    subObject = {...subObject, id : createUUID()}
+    let temp = task.subtask;
+    temp.push(subObject);
+
+    // setTask((prevState)=>({
+    //     ...prevState,
+    //     subtask : temp
+    // }))
+    setSubTaskDetails({
+        id : "",
+        heading : "",
+        description : "",
+        assigned_To : "",
+        assigned_By : "",
+        status : location.state.statusName,
+    })
+    setShowSubTask(false);
+}
+const handleSubTaskDetails = (e)=>{
+  const {name, value} = e.target;
+  setSubTaskDetails((prevState)=>({
+      ...prevState,
+      [name] : value
+  }))
+}
   
 
   return (
@@ -107,12 +150,25 @@ const TaskDetails = () => {
                     return (<SubTask key={idx} subtask={subtask} getSubTask ={getSubTask}/>);
                 })}
             </div> 
+            <div>
+                        <div className='add-new-task-button-cont'>
+                            <button type="button" className=" add-new-task-button" onClick={()=>setShowSubTask(true)}> Add new Sub-task</button> 
+                        </div>
+                    </div>
+            
+            {showSubTask && 
+                <SubTaskForm 
+                    subtaskDetails={subtaskDetails}
+                    createSubtask = {createSubtask}
+                    handleSubTaskDetails = {handleSubTaskDetails}
+                />}
           </div>
         </div>
       </div>
       {
         (showSubTaskDetails === true)? <SubTaskDetails closePopUp={closePopUp} subTask={subTask} statusOptions={statusOptions}/> : null
       }
+      
     </div>
   );
 };

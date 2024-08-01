@@ -4,26 +4,71 @@ import { useDispatch } from 'react-redux';
 import { addBoard } from '../Redux/Reducers/appBoardSlice';
 import { addStatusBar} from '../Redux/Reducers/appBoardSlice';
 import {getPath} from '../../Utils/Utils'
-
-
-
+import { createUUID } from "../../Utils/Utils";
 
 const Modal = (props) => {
     const [titleName, setTitleName] = useState("");
     const dispatch = useDispatch();
 
-    const createBoard = (e, title) =>{
+    const createBoard = async (e, title) =>{
         e.preventDefault();
+        let board_id = createUUID()
+        let boardStatusBars= [
+          {
+            name: "TODO",
+            value: [],
+          },
+          {
+            name: "INPROGRESS",
+            value: [],
+          },
+          {
+            name: "COMPLETED",
+            value: [],
+          },
+        ]
+        
+      
+        
 
-        if(title == "Board"){
-            dispatch(addBoard(titleName));
-        }
-        else{
-            let path = getPath();
-            dispatch(addStatusBar({statusBarName :titleName,boardId:path}));
-        }
-        setTitleName("");
+        // if(title == "Board"){
+        //     dispatch(addBoard(titleName));
+        // }
+        // else{
+        //     let path = getPath();
+        //     dispatch(addStatusBar({statusBarName :titleName,boardId:path}));
+        // }
+        // setTitleName("");
+        // props.closeModal(false);
+
+        try {
+
+            let statusBar = boardStatusBars.reduce((actual, item) => {
+                actual += item.name + ",";
+                return actual;
+            }, "")
+
+            const response = await fetch('http://localhost:8080/board/create', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({id:board_id, name: titleName, statusBar : statusBar}),
+            });
+        
+            if (response.ok) {
+              const data = await response.json();
+              console.log('Board saved:', data);
+            } else {
+              console.error('Error saving board:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+          setTitleName("");
         props.closeModal(false);
+
+
     }
 
   return (

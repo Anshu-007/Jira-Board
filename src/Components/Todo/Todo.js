@@ -3,15 +3,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { getPath, getBoard, getStatusOptions } from '../../Utils/Utils';
 
-const Todo = ({task,idx, statusName}) => {
-
-  const appBoards = useSelector(state => state.appBoard);
+const Todo = ({task,idx, statusName,statusBarData}) => {
+console.log(statusBarData,'FROM TODO')
+  // const appBoards = useSelector(state => state.appBoard);
 
   const navigate = useNavigate();
   let completedSubTask = 0;
-  let totalSubTask = task.subtask.length;
+  let totalSubTask = task?.subtask?.length || 0;
 
-  let subTask = task.subtask;
+  let subTask = task?.subtask || [];
   for(let i = 0; i < subTask.length; i++){
     if(subTask[i].status === "COMPLETED"){
       completedSubTask++;
@@ -20,10 +20,12 @@ const Todo = ({task,idx, statusName}) => {
 
   const navigateToTakDetails = (taskId)=>{
     let boardId = getPath();
-    let board = getBoard(appBoards,boardId)
-    let statusOptions = getStatusOptions(board)
+    // let board = getBoard(statusBarData,boardId)
+    // console.log(board)
+    // let statusOptions = getStatusOptions(board)
+    // console.log(statusOptions);
     let path = `/taskDetails/${taskId}`
-    navigate(path,{state:{task,statusOptions,boardId,statusName}})
+    navigate(path,{state:{task,boardId,statusName}})
   }
 
   return (

@@ -27,16 +27,17 @@ const AddTask = (props) => {
         assigned_By : "",
         status : "TODO",
     });
-    const appBoards = useSelector(state=>state.appBoard)
+    const appBoards = useSelector(state=>state.appBoard)    
     const dispatch = useDispatch();
     const location = useLocation();
     let boardId = getPath();
-    // console.log(appBoards)
-    let board = getBoard(appBoards, boardId);
+    // console.log(appBoards)                   
+    // let board = getBoard(appBoards, boardId);
     // console.log(boardId)
-    let statusOptions = getStatusOptions(board);
+    let statusOptions = getStatusOptions(props.board);  
+    console.log(statusOptions)
 
-    function submit(e){
+    async function submit(e){
         e.preventDefault();
         let newTask = task;
         newTask = {...newTask, id : createUUID()};
@@ -45,6 +46,29 @@ const AddTask = (props) => {
         let boardId = getPath();
 
         dispatch(addTask({task : newTask, boardId : boardId }));
+        try {
+            const response = await fetch('https://xyz.com', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({task : newTask, boardId : boardId }),
+            });
+        
+            if (response.ok) {
+              const data = await response.json();
+              console.log('Board saved:', data);
+            } else {
+              console.error('Error saving board:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        //   setTitleName("");
+        // props.closeModal(false);
+
+    
+
         setTask({
             id : "",
             heading : "",

@@ -30,18 +30,20 @@ export function getPath(){
   let newString = pathName.substring(idx+1);
   return newString; 
 }
-export function getBoard(appBoards, boardId){
+export function getBoard(appBoards, Id){
+    // console.log(appBoards)
     for(let i = 0; i < appBoards.length; i++){
-        if(appBoards[i].board_id === boardId){
+        if(appBoards[i].id === Id){
             return appBoards[i];
         }
     }
     return {};
 }
 export function getStatusOptions(board){
-    
-    let statusBars= board.boardStatusBars;
-    let statusOptions = statusBars.map((status,idx)=> status.name)
+    console.log(board)
+    let statusBars= board.statusBar.split(",");
+    console.log(statusBars)
+    let statusOptions = statusBars.map((status,idx)=> status);
 
     
     return statusOptions;
