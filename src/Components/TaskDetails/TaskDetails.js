@@ -1,6 +1,6 @@
 import React from "react";
 import "./taskdetails.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux'
 import SubTaskDetails from '../SubTaskDetails/SubTaskDetails'
 import "../../index.css";
@@ -10,15 +10,16 @@ import { useSelector } from "react-redux";
 import {deleteTask} from '../Redux/Reducers/appBoardSlice'
 import SubTaskForm from "../AddTask/SubTaskForm";
 import { createUUID } from "../../Utils/Utils";
+import { Descriptions } from "antd";
 
 
 
-const TaskDetails = () => {
+const TaskDetails = (props) => {
   // two states to show task and share data to showtask details 
   const [showSubTaskDetails,setShowSubTaskDetails] = useState(false);
   const [showSubTask, setShowSubTask] = useState(false);
   const [subTask,setSubTask] = useState({});
-  const statusBars = useSelector(state=>state.appBoard)
+  // const statusBars = useSelector(state=>state.appBoard)
   // console.log(statusBars)
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,18 +33,24 @@ const TaskDetails = () => {
     assigned_By : "",
     status : location.state.statusName,
 });
+  // const [task, setTask] = useState({});
    
-  let task = location.state.task;
-  // console.log(task)
+  let {task} = props
+  console.log(task,"TASK")
   let statusOptions = location.state.statusOptions;
+  console.log(statusOptions,"statusOptions")
   let boardId = location.state.boardId;
+  console.log(boardId,"BOARDID")
   let statusName = location.state.statusName;
+  console.log(statusName,"statusName")
+ 
+
   
   let subtasks = task?.subtask || [];
   // console.log(subtasks)
 
 
-  
+
   function getSubTask(e,subtask){
     setShowSubTaskDetails(true);
     setSubTask(subtask);
@@ -96,11 +103,15 @@ const handleSubTaskDetails = (e)=>{
       [name] : value
   }))
 }
+// useEffect(()=>{
+//   getTasks()
+// },[])
   
 
   return (
     <div className="taskdetails-main-cont">
       <div className="task-details-one">
+        
         <div className="task-details-heading-one">
           <div className="TASK-heading">
             Task Details.
@@ -110,6 +121,7 @@ const handleSubTaskDetails = (e)=>{
             <button onClick={()=>navigate(-1)} className="primary-btn">back</button>
           </div>
         </div>
+        <div style={{height:"50px", backgroundColor : "#3bab3b4a" , border : "2px dashed green" , borderRadius : "4px"}}></div>
         <div className="details-wrapper-one">
           <div className="main-task-details">
             <div className="main-task-headings-cont">
@@ -118,7 +130,7 @@ const handleSubTaskDetails = (e)=>{
             </div>
             <div className="main-task-headings-cont">
               <div className="task-heading">Task Name :</div>
-              <div className="task-content-cont">{task.heading}</div>
+              <div className="task-content-cont">{task.name}</div>
             </div>
             <div className=" descriptiontask">
               <div className="task-heading">Task Description :</div>
@@ -129,16 +141,16 @@ const handleSubTaskDetails = (e)=>{
               <div className="task-content-cont">{subtasks.length}</div>
             </div>
             <div className="main-task-headings-cont">
-              <div className="task-heading">To Do's :</div>
-              <div className="task-content-cont">{}</div>
+              <div className="task-heading">Status:</div>
+              <div className="task-content-cont">{task.status.toUpperCase()}</div>
             </div>
             <div className="main-task-headings-cont">
-              <div className="task-heading">Pending :</div>
-              <div className="task-content-cont">{}</div>
+              <div className="task-heading">Assign By :</div>
+              <div className="task-content-cont">{task.assignBy}</div>
             </div>
             <div className="main-task-headings-cont">
-                <div  className="task-heading">Completed :</div>
-                <div className="task-content-cont">{}</div>
+                <div  className="task-heading">Assign To :</div>
+                <div className="task-content-cont">{task.assignTo}</div>
             </div>
           </div>
           <div className="sub-task-details">

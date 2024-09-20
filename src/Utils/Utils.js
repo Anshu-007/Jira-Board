@@ -40,11 +40,11 @@ export function getBoard(appBoards, Id){
     return {};
 }
 export function getStatusOptions(board){
-    console.log(board)
-    let statusBars= board.statusBar.split(",");
-    console.log(statusBars)
-    let statusOptions = statusBars.map((status,idx)=> status);
+    // console.log(board)
+    // let statusBars= board.statusBar.split(",");
+    // console.log(statusBars)
+    // let statusOptions = statusBars.map((status,idx)=> status);
 
     
-    return statusOptions;
+    // return statusOptions;
 }

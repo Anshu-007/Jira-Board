@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createUUID } from "../../../Utils/Utils";
 
 let localData = localStorage.getItem("boards");
-const boardData = localData ? JSON.parse(localData) : [];
+const boardData =  [];
 
 const appboardSlice = createSlice({
   name: "appBoard",
   initialState: boardData,
+
   reducers: {
     addTask(state, action) {
       let boardId = action.payload.boardId;
@@ -171,7 +172,12 @@ const appboardSlice = createSlice({
     },
     createSubTask(state,action){
       
+    },
+    allBoards(state,action){
+      console.log(state,"STATE")
+      console.log(action.payload)
     }
+    
   },
 });
 
@@ -184,5 +190,6 @@ export const {
   changeCounter,
   dragAndDrop,
   deleteTask,
-  createSubTask
+  createSubTask,
+  allBoards
 } = appboardSlice.actions;

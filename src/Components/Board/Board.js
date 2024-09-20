@@ -6,8 +6,9 @@ import StatusBar from '../StatusBar/StatusBar'
 import AddTask from '../AddTask/AddTask'
 import Modal from '../Modals/Modal'
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getBoard, getPath } from '../../Utils/Utils'
+// import { allBoards } from '../Redux/Reducers/appBoardSlice'
 
 const Board = () => {
 
@@ -22,6 +23,7 @@ const Board = () => {
     const [barIndex , setBarIndex] = useState({});
     const location = useLocation()
     // let boardName = location.state.boardName;
+    
     let boardName = '';
     let boardId = getPath();
 
@@ -31,21 +33,26 @@ const Board = () => {
             try {
               let boards = await fetch(`http://localhost:8080/board/getBoard/${boardId}`);
               let response = await boards.json();
-            //   console.log(response);
+              console.log(response);
+            
               let index = {};
               let bars = response.statusBar.split(',').map((val,idx)=>{
                   if(typeof val === "string" && val != ''){
-                        // console.log(typeof typeof val)
+                        
                         index[val] = idx;
 
                         return { name : val , value : []  }
                     }
                     
                 }).filter((val)=>val != undefined);
+                // console.log(index ,"INDEX")
                 setBarIndex(index);
                 setBoard([...bars]);
-                // console.log(bars)
+                // console.log(bars ,"BARSDATA")
+
                 getTasks([...bars],index);
+
+                
             } catch (error) {
               console.log( error);
             }
@@ -60,14 +67,18 @@ const Board = () => {
         try {
             let data = await fetch(`http://localhost:8080/task/getAllTask/${boardId}`)
             let response = await data.json();
-            // console.log(response)
+            console.log(response,"RESPONSE")
             let bars = statusBar;
-            console.log(bars)
+            // console.log(bars)
             let obj = {};
             for(let i = 0 ; i < response.length ; i++){
-                let status = response[i].status;
+                let status = response[i]?.status?.toUpperCase();
+                // console.log(status)
                 if(obj[status] !== undefined){
                     obj[status].push(response[i])
+                }else if (status === "" || status == undefined){
+                    // console.log("hello")
+                    continue;
                 }else{
                     obj[status] = [];
                     obj[status].push(response[i])
@@ -75,18 +86,23 @@ const Board = () => {
 
                 
             }
-            console.log(bars)
-            console.log(barIndex)
-            console.log(obj)
+            // console.log(barIndex)
+            // console.log(obj)
             for(let val in obj){
+                // console.log(obj)
+                // console.log(bars,"updatedBar")
+                // console.log(index)
                 bars[index[val]].value = [...obj[val]];
+                // console.log(bars,"updatedBar")
             }
+            
                 
-            // console.log(bars);
-            setBoard((prevState)=>{console.log(prevState,bars) 
+            console.log(bars);
+            setBoard((prevState)=>{
+                // console.log(prevState,bars) 
                 return [...bars]})
         } catch (error) {
-            console.log(error)
+            console.log(error,"ERROR")
         }
     }
    
@@ -103,9 +119,11 @@ const Board = () => {
     const handleAddStatusBarModal = (val) =>{
         setShowAddBoard(val)
     }
+
+    // console.log(board, "BOARD")
   return (
     <div className='board-container'>
-        {showAddTaskModal ? <AddTask board = {appBoards} handleAddTaskModal={handleAddTaskModal}/> : null }
+        {showAddTaskModal ? <AddTask board = {appBoards} showAddTaskModal = {showAddTaskModal}  handleAddTaskModal={handleAddTaskModal}/> : null }
         {/* {showAddTaskModal ? <Modal  closeModal={handleAddTaskModal}/> : null} */}
         <div className='active-board-and-add-task-btn-container'>
             <div className='current-board-heading'>{boardName}</div>
@@ -117,6 +135,7 @@ const Board = () => {
 
             {
                board ?  board.map((status,idx)=>{
+                // console.log(status.value,"VALUE")
                     return  <StatusBar 
                                 key={idx} 
                                 statusBarData = {status.value} 
@@ -130,7 +149,7 @@ const Board = () => {
                                 setTaskId={setTaskId}
                                 
 
-                            />
+                            /> 
                     
                 }) : null
             }

@@ -11,6 +11,7 @@ import Modal from '../Modals/Modal';
 // import {appBoards} from "../../Constants"
 import { useSelector, useDispatch } from 'react-redux';
 import { getBoard } from '../../Utils/Utils';
+// import { allBoards } from '../Redux/Reducers/appBoardSlice'
 
 const SideBar = () => {
   const [activeBoardName,setActiveBoardName] = useState("");
@@ -19,23 +20,28 @@ const SideBar = () => {
     const navigate = useNavigate();
 const reduxState = useSelector(state=>state.appBoard)
   const [boards, setBoards] = useState();
+  const dispatch = useDispatch();
   
   useEffect(()=>{
-    console.log(reduxState);
+    // console.log(reduxState);
     
     async function getBoardData() {
       try {
         let boards = await fetch("http://localhost:8080/board/getAllBoards");
         let response = await boards.json();
         setBoards(response);
+        setActiveBoardName(response[0].name)
+        
+        // dispatch(allBoards(response))
+
         
       } catch (error) {
         console.log( error);
       }
     }
     getBoardData();
-    setBoards(reduxState);
-  },[reduxState])
+    // setBoards(reduxState);
+  },[])
 
   function toggleSideBar(){
 
@@ -63,6 +69,7 @@ const reduxState = useSelector(state=>state.appBoard)
     console.log(board)
     navigate(`/board/${boardID}`, {state:{boardName: board.name}});
     setActiveBoardName(board.name);
+    console.log(board.name)
   }
 
   const logoutUser = ()=>{
@@ -89,7 +96,7 @@ const reduxState = useSelector(state=>state.appBoard)
                 
                   <div
                     onClick={()=>{navigateToBoard(board)}}
-                    className={board.boardName===activeBoardName? "active-Board-Name" : "tabs" } 
+                    className={board.name===activeBoardName? "active-Board-Name" : "tabs" } 
                     key={idx}
                   >
                     <div className="tooltext-board">
