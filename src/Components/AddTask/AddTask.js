@@ -236,7 +236,7 @@ const AddTask = (props) => {
             
                     
                     
-                    <Select  style={{width : "100%"}} onChange={handleTaskStatus} placeholder="Select Status" optionFilterProp="label"   
+                    <Select  style={{width : "100%",marginTop:"10px"}} onChange={handleTaskStatus} placeholder="Select Status" optionFilterProp="label"   
                     options = {statusOptions} />
                     
                     
