@@ -1,9 +1,8 @@
-:root{
- 
-    --primary: rgb(195 240 255);
-    --secondary: rgb(244 248 249);
-    --textcolor: black;
-    --logoColor:#126AE5;
+:root {
+  --primary: rgb(93, 173, 226); /* Sky blue for links, buttons */
+  --secondary: rgb(250, 250, 250); /* Light grey background */
+  --textcolor: rgb(33, 47, 61); /* Steel grey text */
+  --logoColor: rgb(155, 89, 182); /* Lavender for logos */
 }
 
 
@@ -12,8 +11,10 @@
 *{
     margin:0;
     padding:0;
-    font-family: 'Roboto', sans-serif;  
+    font-family: 'Dancing Script', cursive;
+    /* animation: swing 1s ease-in-out infinite;   */
 }
+
 
 /* width */
 ::-webkit-scrollbar {

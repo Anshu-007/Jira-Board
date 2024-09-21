@@ -12,6 +12,7 @@ import Modal from '../Modals/Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBoard } from '../../Utils/Utils';
 // import { allBoards } from '../Redux/Reducers/appBoardSlice'
+import { Button } from 'antd';
 
 const SideBar = () => {
   const [activeBoardName,setActiveBoardName] = useState("");
@@ -121,13 +122,13 @@ const reduxState = useSelector(state=>state.appBoard)
           </div>
           <div className="add-tab-cont">
             {activeSideBar ? (
-              <button className="primary-btn" onClick={(e)=>handleModalView(true)} ><img className='arrow' src={plusSign} alt='plus' />Add New Board</button>
+              <Button className="primary-btn" onClick={(e)=>handleModalView(true)} ><img className='arrow' src={plusSign} alt='plus' />Add New Board</Button>
             ):(
-              <button className="primary-btn" onClick={(e)=>handleModalView(true)} >+
+              <Button className="primary-btn" onClick={(e)=>handleModalView(true)} >+
               <span className='add-tool-text'>
                 Add Board
               </span>
-              </button>
+              </Button>
             )}
             
           </div>
@@ -136,14 +137,14 @@ const reduxState = useSelector(state=>state.appBoard)
 
         <div className="hidebar-cont">
           {activeSideBar ? (
-            <button className="primary-btn" onClick={()=>toggleSideBar()} ><img className='arrow' src={leftArrow} alt='left' /><div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Show Side Bar</div></button>
+            <Button className="primary-btn" onClick={()=>toggleSideBar()} ><img className='arrow' src={leftArrow} alt='left' /><div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >Show Side Bar</div></Button>
           ):(
             
-            <button className="primary-btn-right-arrow" onClick={()=>toggleSideBar()} ><img className='arrow' src={rightArrow} alt='left' />
+            <Button className="primary-btn-right-arrow" onClick={()=>toggleSideBar()} ><img className='arrow' src={rightArrow} alt='left' />
             <span className='tooltiptext'>
               Show Side Bar
             </span>
-            </button>
+            </Button>
             
           )}  
 

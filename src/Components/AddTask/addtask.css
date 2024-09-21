@@ -70,6 +70,7 @@
 .form-upperpart{
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 .label-input-cont{
     display: flex;
