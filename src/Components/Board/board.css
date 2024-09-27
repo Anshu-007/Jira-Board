@@ -15,7 +15,8 @@
     
 }
 .add-task-btn{
-    
+    display: flex;
+    gap: 10px;
 }
 .status-bar-container{
     display: flex;
