@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createUUID, getBoard, getPath, getStatusOptions } from '../../Utils/Utils';
 import { useLocation } from 'react-router';
 
-import { Input ,DatePicker,Select,Modal } from 'antd';
+import { Input ,DatePicker,Select,Modal,Form } from 'antd';
 
 
 
@@ -20,7 +20,7 @@ const AddTask = (props) => {
   const [statusOptions , setStatusOptions] = useState([])
   let boardId = getPath();
     const [ task ,setTask] = useState({
-      id : "",
+      // id : "",
       boardId:boardId,
       name : "",
       description :"",
@@ -29,18 +29,26 @@ const AddTask = (props) => {
       assignBy : "",
       status : "",
     });
-    const [subtaskDetails, setSubTaskDetails] = useState({
-      id : "",
+    const [validateError , setValidateError]  = useState({
       name : "",
-      description : "",
-      assigned_To : "",
-      assigned_By : "",
-      status : "TODO",
-    });
-    const [subTask,setSubTask] = useState([]);
-    const appBoards = useSelector(state=>state.appBoard)    
-    const dispatch = useDispatch();
-    const location = useLocation();
+      description :"",
+      dueDate : "",
+      assignTo : "",
+      assignBy : "",
+      status : "",
+    })
+    // const [subtaskDetails, setSubTaskDetails] = useState({
+    //   id : "",
+    //   name : "",
+    //   description : "",
+    //   assigned_To : "",
+    //   assigned_By : "",
+    //   status : "TODO",
+    // });
+    // const [subTask,setSubTask] = useState([]);
+    // const appBoards = useSelector(state=>state.appBoard)    
+    // const dispatch = useDispatch();
+    // const location = useLocation();
     
     // console.log(appBoards)                   
     // let board = getBoard(appBoards, boardId);
@@ -52,7 +60,12 @@ const AddTask = (props) => {
         e.preventDefault();
         let newTask = task;
         // newTask = {...newTask, id : createUUID()};
-        setTask(newTask);
+        for(let val in newTask){
+          validateFields(val,newTask[val])
+        }
+        for(let val in validateError){
+          if(validateError[val] !== "") return 
+        }
 
         // let boardId = getPath();
 
@@ -77,16 +90,17 @@ const AddTask = (props) => {
           }
         //   setTitleName("");
         // props.closeModal(false);
+        
 
     
 
-        setTask({
-            id : "",
-            heading : "",
-            description :"",
-            subtask :[],
-            status : ""
-        })
+        // setTask({
+        //     id : "",
+        //     heading : "",
+        //     description :"",
+        //     subtask :[],
+        //     status : ""
+        // })
         props.handleAddTaskModal(false);
 
     }
@@ -101,6 +115,7 @@ const AddTask = (props) => {
           return { value : value , label : value}
         })
         // console.log(bars)
+        console.log(newBar,"hello")
         setStatusOptions([...newBar])
         
       }catch(error){
@@ -108,17 +123,29 @@ const AddTask = (props) => {
       }
     }
 
-    const handleSubTaskDetails = (e)=>{
-        const {name, value} = e.target;
-        setSubTaskDetails((prevState)=>({
-            ...prevState,
-            [name] : value
-        }))
-        
-    }
 
+    // const handleSubTaskDetails = (e)=>{
+    //     const {name, value} = e.target;
+    //     setSubTaskDetails((prevState)=>({
+    //         ...prevState,
+    //         [name] : value
+    //     }))
+        
+    // }
+    const validateFields = (name,value)=>{
+      if(name === "name"){
+        if(value.length > 100){
+          setValidateError((preState)=>({...preState,[name] : "maximum length should be hundered"}))
+        }else if(value === ""){
+          setValidateError((preState)=>({...preState,[name] : "field cannot be empty"}))
+        }else{
+          setValidateError((preState)=>({...preState,[name] : ""}))
+        }
+      }
+    }
     const handleTaskInput = (e)=>{
         const {name, value} = e.target;
+       validateFields(name,value);
         setTask((prevState)=>({
             ...prevState,
             [name]  : value
@@ -146,26 +173,26 @@ const AddTask = (props) => {
       }))
     }
 
-    const createSubtask = ()=>{
+    // const createSubtask = ()=>{
        
-        let subObject = subtaskDetails;
-        subObject = {...subObject, id : createUUID()}
-        let temp = task.subtask;
-        temp.push(subObject);
-        setTask((prevState)=>({
-            ...prevState,
-            subtask : temp
-        }))
-        setSubTaskDetails({
-            id : "",
-            heading : "",
-            description : "",
-            assigned_To : "",
-            assigned_By : "",
-            status : "TODO",
-        })
-        setShowSubTask(false);
-    }
+    //     let subObject = subtaskDetails;
+    //     subObject = {...subObject, id : createUUID()}
+    //     let temp = task.subtask;
+    //     temp.push(subObject);
+    //     setTask((prevState)=>({
+    //         ...prevState,
+    //         subtask : temp
+    //     }))
+    //     setSubTaskDetails({
+    //         id : "",
+    //         heading : "",
+    //         description : "",
+    //         assigned_To : "",
+    //         assigned_By : "",
+    //         status : "TODO",
+    //     })
+    //     setShowSubTask(false);
+    // }
     useEffect(()=>{
       getStatusOptions();
     },[])
@@ -174,41 +201,51 @@ const AddTask = (props) => {
   return (
     // <div className='add-task-modal-background'>
         <Modal open={props.showAddTaskModal} onOk={submit} onCancel={props.handleAddTaskModal}  okText = {"Add Task"}>
-            <form onSubmit={(e)=>{submit(e)}}  >
+            <Form onSubmit={(e)=>{submit(e)}}  >
                 <div className='add-task-heading'>
                 Add new task
                 </div>
                 <div className='form-upperpart'>
+                    <Form.Item validateStatus={validateError.name ? "error" : null } help= {validateError.name ? validateError.name : ""}>
                   <div className='label-input-cont'>
-                    
                     <Input onChange={(e)=>{handleTaskInput(e)}} name="name"  value={task.name}  type="text" required placeholder="Task name" />
                   </div>
+                    </Form.Item>
+                    <Form.Item validateStatus={validateError.description ? "error" : null } help= {validateError.description ? validateError.description : ""}>
                   <div className='label-input-cont'>
                     
                     
                       <Input onChange={(e)=>{handleTaskInput(e)}} name='description' value={task.description} placeholder='Description'  type="text" required />
                     
                   </div>
+                  </Form.Item>
+                  <Form.Item validateStatus={validateError.assignBy ? "error" : null } help= {validateError.assignBy ? validateError.assignBy : ""}>
                   <div className='label-input-cont'>
                     
                     
                       <Input onChange={(e)=>{handleTaskInput(e)}} name="assignBy"  value={task.assignBy} placeholder='Assigned By' type="text" required />
                     
                   </div>
+                  </Form.Item>
+                  
+                  <Form.Item validateStatus={validateError.assignTo ? "error" : null } help= {validateError.assignTo ? validateError.assignTo : ""}>
                   <div className='label-input-cont'>
                     
                       <Input onChange={(e)=>{handleTaskInput(e)}} name="assignTo"  value={task.assignTo} placeholder='Assigned To' type="text" required />
                     
                   </div>
+                  </Form.Item>
+                  <Form.Item>
                   <div className=''>
                     
-                      <DatePicker style={{width : "100%"}}  onChange={handleTaskDate} placeholder='Select Date' required />
+                      <DatePicker style={{width : "100%"}}  onChange={handleTaskDate} placeholder='Due Date' required />
                    
                   </div>
+                  </Form.Item>
                 </div>
                 
                 
-                {subTask.length != 0 ?
+                {/* {subTask.length != 0 ?
                     <div className='created-subtask-wrapper'>
                     {task.subtask.map((item, idx)=>{
                           return (<div key={idx} className='subtask-wrapper'>
@@ -219,13 +256,13 @@ const AddTask = (props) => {
                     </div>
                     : 
                     null
-                }
-                {showSubTask && 
+                } */}
+                {/* {showSubTask && 
                 <SubTaskForm 
                     subtaskDetails={subtaskDetails}
                     createSubtask = {createSubtask}
                     handleSubTaskDetails = {handleSubTaskDetails}
-                />}
+                />} */}
 
                     {/* <div>
                         <div className='add-new-task-button-cont'>
@@ -235,9 +272,10 @@ const AddTask = (props) => {
                 
             
                     
-                    
+                    <Form.Item validateStatus={validateError.dueDate ? "error" : null } help= {validateError.dueDate ? validateError.dueDate : ""}>
                     <Select  style={{width : "100%",marginTop:"10px"}} onChange={handleTaskStatus} placeholder="Select Status" optionFilterProp="label"   
                     options = {statusOptions} />
+                    </Form.Item>
                     
                     
                         
@@ -251,7 +289,7 @@ const AddTask = (props) => {
                         </div>
                     </div> */}
                 {/* </div>  */}
-            </form>
+            </Form>
         </Modal>
     // </div>
   )

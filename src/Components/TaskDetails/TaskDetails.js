@@ -25,14 +25,14 @@ const TaskDetails = (props) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const [subtaskDetails, setSubTaskDetails] = useState({
-    id : "",
-    heading : "",
-    description : "",
-    assigned_To : "",
-    assigned_By : "",
-    status : location.state.statusName,
-});
+//   const [subtaskDetails, setSubTaskDetails] = useState({
+//     id : "",
+//     heading : "",
+//     description : "",
+//     assigned_To : "",
+//     assigned_By : "",
+//     status : location.state.statusName,
+// });
   // const [task, setTask] = useState({});
    
   let {task} = props
@@ -61,48 +61,49 @@ const TaskDetails = (props) => {
   }
 
 
-    
-  function handleDeleteTask(){
-  
-    // let boardId = getPath();
-    
-  let deleteTaskProperties = {
-    task : task,
-    boardId : boardId,
-    statusName :statusName
-  }
-    dispatch(deleteTask(deleteTaskProperties));
-    
-    navigate(-1);
-  }
-  const createSubtask = ()=>{
-       
-    let subObject = subtaskDetails;
-    subObject = {...subObject, id : createUUID()}
-    let temp = task.subtask;
-    temp.push(subObject);
 
-    // setTask((prevState)=>({
-    //     ...prevState,
-    //     subtask : temp
-    // }))
-    setSubTaskDetails({
-        id : "",
-        heading : "",
-        description : "",
-        assigned_To : "",
-        assigned_By : "",
-        status : location.state.statusName,
-    })
-    setShowSubTask(false);
-}
-const handleSubTaskDetails = (e)=>{
-  const {name, value} = e.target;
-  setSubTaskDetails((prevState)=>({
-      ...prevState,
-      [name] : value
-  }))
-}
+    
+  // function handleDeleteTask(){
+  
+  //   // let boardId = getPath();
+    
+  // let deleteTaskProperties = {
+  //   task : task,
+  //   boardId : boardId,
+  //   statusName :statusName
+  // }
+  //   dispatch(deleteTask(deleteTaskProperties));
+    
+  //   navigate(-1);
+  // }
+//   const createSubtask = ()=>{
+       
+//     let subObject = subtaskDetails;
+//     subObject = {...subObject, id : createUUID()}
+//     let temp = task.subtask;
+//     temp.push(subObject);
+
+//     // setTask((prevState)=>({
+//     //     ...prevState,
+//     //     subtask : temp
+//     // }))
+//     setSubTaskDetails({
+//         id : "",
+//         heading : "",
+//         description : "",
+//         assigned_To : "",
+//         assigned_By : "",
+//         status : location.state.statusName,
+//     })
+//     setShowSubTask(false);
+// }
+// const handleSubTaskDetails = (e)=>{
+//   const {name, value} = e.target;
+//   setSubTaskDetails((prevState)=>({
+//       ...prevState,
+//       [name] : value
+//   }))
+// }
 // useEffect(()=>{
 //   getTasks()
 // },[])
@@ -117,7 +118,7 @@ const handleSubTaskDetails = (e)=>{
             Task Details.
           </div>
           <div className="task-details-button-wrapper">
-            <button onClick={handleDeleteTask} className="danger-btn">delete</button>
+            {/* <button onClick={handleDeleteTask} className="danger-btn">delete</button> */}
             <button onClick={()=>navigate(-1)} className="primary-btn">back</button>
           </div>
         </div>
@@ -168,18 +169,18 @@ const handleSubTaskDetails = (e)=>{
                         </div>
                     </div>
             
-            {showSubTask && 
+            {/* {showSubTask && 
                 <SubTaskForm 
                     subtaskDetails={subtaskDetails}
                     createSubtask = {createSubtask}
                     handleSubTaskDetails = {handleSubTaskDetails}
-                />}
+                />} */}
           </div>
         </div>
       </div>
-      {
+      {/* {
         (showSubTaskDetails === true)? <SubTaskDetails closePopUp={closePopUp} subTask={subTask} statusOptions={statusOptions}/> : null
-      }
+      } */}
       
     </div>
   );

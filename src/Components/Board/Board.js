@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import AddUser from '../AddUser/AddUser'
 import "./board.css"
 import plusSign from "../../Assets/plus-logo.png"
 import StatusBar from '../StatusBar/StatusBar'
@@ -14,6 +15,7 @@ const Board = () => {
 
     const [showAddBoard, setShowAddBoard] = useState(false);
     const [showAddTaskModal,setShowAddTaskModal] = useState(false);
+    const [showCreateUserModal,setShowCreateUserModal] = useState(false);
     const reduxState = useSelector(state=>state.appBoard)
     const [appBoards,setAppBoards] = useState();
     const [board,setBoard] = useState(null);
@@ -115,20 +117,28 @@ const Board = () => {
         // console.log(e)
         setShowAddTaskModal(val);
     }
+    const handleCreateUserModal = (e,val)=>{
+        setShowCreateUserModal(val)
+        console.log(val)
+    }
 
     const handleAddStatusBarModal = (val) =>{
         setShowAddBoard(val)
     }
 
+
+
     // console.log(board, "BOARD")
   return (
     <div className='board-container'>
         {showAddTaskModal ? <AddTask board = {appBoards} showAddTaskModal = {showAddTaskModal}  handleAddTaskModal={handleAddTaskModal}/> : null }
+        {showCreateUserModal ? <AddUser showCreateUserModal = {showCreateUserModal} handleCreateUserModal = {handleCreateUserModal}/>:null}
         {/* {showAddTaskModal ? <Modal  closeModal={handleAddTaskModal}/> : null} */}
         <div className='active-board-and-add-task-btn-container'>
             <div className='current-board-heading'>{boardName}</div>
             <div className='add-task-btn' >
                 <button onClick={(e)=>handleAddTaskModal(e,true)} className='primary-btn'>add task</button>
+                <button onClick={(e)=>handleCreateUserModal(e,true)} className='primary-btn'>create user</button>
             </div>
         </div>
         <div className='status-bar-container'>
