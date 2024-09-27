@@ -6,6 +6,7 @@ import './home.css'
 import Guidance from '../Guidance/Guidance';
 import Page404 from '../Page404/Page404'
 import TaskDetails from '../TaskDetails/TaskDetails'
+import Header from '../Header/Header';
 
 const Home = () => {
     const location = useLocation();
@@ -20,7 +21,12 @@ const Home = () => {
     },[])
     
   return (
-    <div className='home'>
+    <>
+    <div className="header">
+        <Header/>
+    </div>
+      <div className='home'>
+          {/* <Header/> */}
         <SideBar />
         {location.pathname === "/home" ? 
             <Guidance/> 
@@ -35,6 +41,7 @@ const Home = () => {
         }
         
     </div>
+    </>
   )
 }
 

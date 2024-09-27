@@ -2,7 +2,23 @@
     display: flex;
     height: 100vh;
 }
+
+
+
+
+
 .components-container{
     width: -webkit-fill-available;
     overflow-y: auto;
+}
+.header{
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--primary); /* Dark background */
+  color: #ffffff; /* White text */
+  position: sticky; /* Stick to the top when scrolling */
+  top: 0;
+  z-index: 1000;
 }
