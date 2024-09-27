@@ -1,4 +1,82 @@
-.header{}
+.header-cont{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 .logo{}
+/* Styling for the logo image */
+.logo img {
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+    transition: transform 0.5s ease-in-out; /* Smooth transition for hover animation */
+  }
+  
+  /* Hover effect: rotating the logo */
+  .logo img:hover {
+    transform: rotate(360deg); /* Rotate 360 degrees */
+  }
+  
+  /* Keyframes for continuous rotation animation (optional) */
+  @keyframes rotateLogo {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Apply continuous animation to the logo */
+  .logo img.animated {
+    animation: rotateLogo 5s infinite linear;
+  }
+  
+  /* Hover effect: scaling the logo */
+  .logo img:hover {
+    transform: scale(1.1); /* Slightly enlarge the logo */
+  }
+  
 .heading{}
+/* Basic styling for the heading */
+.heading {
+    font-size: 1.5rem; /* Adjust size as needed */
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+    opacity: 0; /* Initial state for animation (hidden) */
+    transform: translateY(-30px); /* Initial state (slightly above) */
+    animation: fadeInMove 1.5s ease-out forwards; /* Animation with fade and move */
+  }
+  
+  /* Keyframes for fading in and moving the heading */
+  @keyframes fadeInMove {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px); /* Start slightly above */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0); /* End at original position */
+    }
+  }
+  
+  /* Hover effect: adding a subtle pulse */
+  .heading:hover {
+    animation: pulse 0.6s ease-in-out infinite;
+  }
+  
+  /* Keyframes for the pulse animation */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05); /* Slightly enlarge */
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
 .profile{}
