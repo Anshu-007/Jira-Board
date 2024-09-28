@@ -24,7 +24,7 @@ const reduxState = useSelector(state=>state.appBoard)
   const dispatch = useDispatch();
   
 
-  
+
   useEffect(()=>{
     // console.log(reduxState);
     
@@ -160,6 +160,7 @@ const reduxState = useSelector(state=>state.appBoard)
             <div className="tooltext-board">
               <img className='board-logo' src={logout} alt='B'/> 
               {activeSideBar ?
+
               null :
               <span className='board-tooltext'>
                 Logout
@@ -168,9 +169,9 @@ const reduxState = useSelector(state=>state.appBoard)
             </div>
             {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
           
-            <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >
+            {/* <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >
               Logout
-            </div>
+            </div> */}
           </div>
           </div>
         </div>

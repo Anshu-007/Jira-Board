@@ -40,7 +40,12 @@ const Profile = () => {
         </Row>
         
       </Header>
-      <Content style={{height:"400px"}}></Content>
+      <Content style={{height:"400px",marginTop:"150px",padding:"20px"}}>
+        <Card size="small">
+            <Typography size={75} title="Email">Email : {"user email"}</Typography>
+            <Typography size={75} title="Email">Role : {"user Role"}</Typography>
+        </Card>
+      </Content>
       <Footer style={{textAlign:"center"}}>
             Jira 2024 created by you
       </Footer>
