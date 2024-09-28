@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
 }
 .logo{}
 /* Styling for the logo image */
@@ -42,7 +43,7 @@
     font-size: 1.5rem; /* Adjust size as needed */
     color: #333;
     text-align: center;
-    font-weight: bold;
+    font-weight: 900;
     margin: 20px 0;
     opacity: 0; /* Initial state for animation (hidden) */
     transform: translateY(-30px); /* Initial state (slightly above) */
