@@ -24,7 +24,7 @@ const Header = () => {
         },
         {
             key : "3",
-            label : "dummy"
+            label : "Logout"
         }
     
     ];
