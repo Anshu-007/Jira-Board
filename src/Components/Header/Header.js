@@ -37,7 +37,7 @@ const Header = () => {
     }
   return (
     <header className='header-cont'>
-        <div className='logo'>
+        <div className='logo' onClick={()=>{navigate("/home")}}>
             <img src={logoimage} alt="" />
 
         </div>
@@ -46,7 +46,7 @@ const Header = () => {
             <Space>
                 <Typography.Text>name</Typography.Text>
                 <Avatar size={50}  icon={<UserOutlined/>}/>
-                <DownOutlined/>
+                {/* <DownOutlined/> */}
             </Space>
         </Dropdown>
     </header>

@@ -86,7 +86,7 @@ const SignUp = () => {
         <div className='main-container'>
          <div className='image-cont'>
             <div className='image'>
-            <img className='imgs' src={LoginImg} alt="" />
+            {/* <img className='imgs' src={LoginImg} alt="" /> */}
             </div>
             <div className='image-text' >
             Move fast, stay aligned, and build better - together.

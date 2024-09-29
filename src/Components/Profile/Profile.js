@@ -39,11 +39,15 @@ const Profile = () => {
           </Col>
         </Row>
         
+
+
+
       </Header>
       <Content style={{height:"400px",marginTop:"150px",padding:"20px"}}>
         <Card size="small">
-            <Typography size={75} title="Email">Email : {"user email"}</Typography>
-            <Typography size={75} title="Email">Role : {"user Role"}</Typography>
+            <p>Email : user email</p>
+            <p>Role : user Role</p>
+            
         </Card>
       </Content>
       <Footer style={{textAlign:"center"}}>
