@@ -5,14 +5,15 @@ import { addBoard } from "../Redux/Reducers/appBoardSlice";
 import { addStatusBar } from "../Redux/Reducers/appBoardSlice";
 import { getPath } from "../../Utils/Utils";
 import { createUUID } from "../../Utils/Utils";
-import { Input, Button } from "antd";
+import { Input, Button,Form } from "antd";
 
 const Modal = (props) => {
   const [titleName, setTitleName] = useState("");
   const dispatch = useDispatch();
 
   const createBoard = async (e, title) => {
-    e.preventDefault();
+    // e.preventDefault();
+    // console.log("hello")
     let board_id = createUUID();
     let boardStatusBars = [
       {
@@ -74,9 +75,9 @@ const Modal = (props) => {
   return (
     <div className="add-board-modal-background">
       <div className="add-board-modal">
-        <form
-          onSubmit={(e) => {
-            createBoard(e, props.title);
+        <Form
+          onFinish={(e) => {
+            createBoard(e,props.title);
           }}
           className="modal-form"
         >
@@ -92,7 +93,7 @@ const Modal = (props) => {
             required
           />
           <div className="modal-button-wrapper">
-            <Button type="submit" className="primary-btn">
+            <Button htmlType="submit" className="primary-btn">
               Create {props.title}
             </Button>
             <Button
@@ -105,7 +106,7 @@ const Modal = (props) => {
               Cancel
             </Button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   );

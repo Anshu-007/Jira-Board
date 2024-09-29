@@ -23,6 +23,8 @@ const reduxState = useSelector(state=>state.appBoard)
   const [boards, setBoards] = useState();
   const dispatch = useDispatch();
   
+
+
   useEffect(()=>{
     // console.log(reduxState);
     
@@ -47,15 +49,15 @@ const reduxState = useSelector(state=>state.appBoard)
   function toggleSideBar(){
 
     let sideBar = document.getElementById("sidebar");
-    let logoName = document.getElementById("logo-name");
+    // let logoName = document.getElementById("logo-name");
 
     if(activeSideBar === true){
       sideBar.style.width = "75px";
-      logoName.style.display = "none"
+      // logoName.style.display = "none"
       setActiveSideBar(false);
     }else{
       sideBar.style.width = "250px";
-      logoName.style.display = "block"
+      // logoName.style.display = "block"
       setActiveSideBar(true);
     }
        }
@@ -79,15 +81,16 @@ const reduxState = useSelector(state=>state.appBoard)
   }
 
   return (
+
     <div id="sidebar" className='sideBar-menu'>
-      <div className="logo-and-name-cont" onClick={()=>toggleSideBar()}>
-        <div className="logo-cont">
-          <img className="jira-logo" src={jiraLogo} alt="jiralogo" />
-          <div id='logo-name' className="name-cont">
-          JIRA
-        </div>
-        </div>
-      </div>
+      {/* <div className="logo-and-name-cont" onClick={()=>toggleSideBar()}> */}
+        {/* <div className="logo-cont"> */}
+          {/* <img className="jira-logo" src={jiraLogo} alt="jiralogo" /> */}
+          {/* <div id='logo-name' className="name-cont"> */}
+          {/* JIRA */}
+        {/* </div> */}
+        {/* </div> */}
+      {/* </div> */}
       {/* ----------------------------------------------------------------------------------------------------------------------------- */}
       <div className = "tab-and-hidebar-cont">
         <div  className="tab-add-cont">
@@ -157,6 +160,7 @@ const reduxState = useSelector(state=>state.appBoard)
             <div className="tooltext-board">
               <img className='board-logo' src={logout} alt='B'/> 
               {activeSideBar ?
+
               null :
               <span className='board-tooltext'>
                 Logout
@@ -165,9 +169,9 @@ const reduxState = useSelector(state=>state.appBoard)
             </div>
             {/* <img className='board-logo' src={boardLogo} alt='B'/>  */}
           
-            <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >
+            {/* <div className={activeSideBar ? "active-tab-name" : "inactive-tab-name"} >
               Logout
-            </div>
+            </div> */}
           </div>
           </div>
         </div>
